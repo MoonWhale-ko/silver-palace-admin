@@ -1,0 +1,9 @@
+{
+  "name": "silver-palace-admin",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check assets/home.js && node --check scripts/build.mjs"
+  }
+}
