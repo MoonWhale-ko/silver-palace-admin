@@ -25,6 +25,7 @@ export function render(data) {
   });
 }
 if(typeof document!=='undefined'&&document.querySelector('.intro')) {
-  fetch(new URL('../data/home.json',import.meta.url),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(render).catch(()=>console.warn('기본 홈 화면을 표시합니다.'));
+  window.__silverHomeReady = fetch(new URL('../data/home.json',import.meta.url),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(render).catch(()=>console.warn('기본 홈 화면을 표시합니다.'));
   addEventListener('message',e=>{if(e.origin===location.origin&&e.source===parent&&e.data?.type==='home-preview'){try{render(e.data.data);}catch{}}});
 }
+
