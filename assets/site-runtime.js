@@ -1,19 +1,24 @@
-import {validate} from './home.js';
 export function mount(data){
- validate(data);
- const root=document.getElementById('ss-blue-silver'),dialog=document.getElementById('b-dialog'),input=document.getElementById('b-search');
+ const root=document.getElementById('ss-blue-silver'),dialog=root.querySelector('#b-dialog'),input=root.querySelector('#b-search');
  root.querySelector('h1').textContent=data.heading;root.querySelector('.b-intro').textContent=data.description;
- const features=root.querySelectorAll('.b-entry');features[0].querySelector('h3').textContent=data.beginnerTitle;features[0].querySelector('p').textContent=data.beginnerDescription;
- features[1].querySelector('h3').textContent=data.menus[0].title;features[1].querySelector('p').textContent=data.menus[0].description;
- root.querySelector('#update-text').textContent=data.updateText;const time=root.querySelector('#update-date');time.textContent=data.updateDate.replaceAll('-','.');time.dateTime=data.updateDate;
- const theme=root.querySelector('#b-theme');let dark=matchMedia('(prefers-color-scheme:dark)').matches;try{const saved=localStorage.getItem('sp-guide-theme');if(saved)dark=saved==='dark';}catch{}
- function paint(){root.dataset.theme=dark?'dark':'light';document.documentElement.style.colorScheme=dark?'dark':'light';theme.textContent=dark?'라이트 모드':'다크 모드';theme.setAttribute('aria-pressed',String(dark));}
+ root.querySelector('#beginner-heading').textContent=data.beginnerTitle;root.querySelector('#beginner-description').textContent=data.beginnerDescription;
+ const theme=root.querySelector('#b-theme');let dark=matchMedia('(prefers-color-scheme:dark)').matches;
+ try{const saved=localStorage.getItem('sp-guide-theme');if(saved)dark=saved==='dark';}catch{}
+ function paint(){root.dataset.theme=dark?'dark':'light';document.documentElement.style.colorScheme=dark?'dark':'light';document.body.style.background=dark?'#1b2026':'#e9ebed';theme.textContent=dark?'라이트 모드':'다크 모드';theme.setAttribute('aria-pressed',String(dark));}
  theme.onclick=()=>{dark=!dark;paint();try{localStorage.setItem('sp-guide-theme',dark?'dark':'light');}catch{}};paint();
- function open(title,url){if(url){location.assign(url);return;}root.querySelector('#dialog-title').textContent=title;if(!dialog.open)dialog.showModal();}
- features[0].querySelector('button').onclick=()=>open(data.beginnerTitle,'');features[1].querySelector('button').onclick=()=>open(data.menus[0].title,data.menus[0].url);
- const categories=['캐릭터','장비','가이드','가이드','가이드'],list=root.querySelector('.b-list');list.replaceChildren();
- data.menus.forEach((m,i)=>{const row=document.createElement('button');row.type='button';row.className='b-record';row.dataset.category=categories[i];const tag=document.createElement('span');tag.className='b-tag';tag.textContent=categories[i];const body=document.createElement('span'),title=document.createElement('strong'),desc=document.createElement('small');title.textContent=m.title;desc.textContent=m.description;body.append(title,desc);const arrow=document.createElement('span');arrow.className='b-row-arrow';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');row.append(tag,body,arrow);row.onclick=()=>open(m.title,m.url);list.append(row);});
- let category='전체';function filter(){let count=0;const q=input.value.trim().toLowerCase();list.querySelectorAll('.b-record').forEach(row=>{row.hidden=!((category==='전체'||row.dataset.category===category)&&row.textContent.toLowerCase().includes(q));if(!row.hidden)count++;});root.querySelector('#b-count').textContent=count+'개';root.querySelector('#b-empty').hidden=count>0;}
- input.oninput=filter;root.querySelectorAll('[data-filter]').forEach(b=>b.onclick=()=>{category=b.dataset.filter;root.querySelectorAll('[data-filter]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));filter();});filter();
+ function show(title,paragraphs,status='준비 중'){
+  root.querySelector('#dialog-title').textContent=title;root.querySelector('#dialog-status').textContent=status;
+  const body=root.querySelector('#dialog-content');body.replaceChildren();paragraphs.forEach(text=>{const p=document.createElement('p');p.textContent=text;body.append(p);});if(!dialog.open)dialog.showModal();
+ }
+ function openMenu(menu){if(menu.url){location.assign(menu.url);return;}show(menu.title,[menu.description+'에 관한 자료를 모을 예정입니다.','현재는 홈 화면을 먼저 구성하고 있습니다. 자료가 준비되면 이 메뉴에서 바로 볼 수 있도록 연결하겠습니다.']);}
+ const menus=root.querySelector('.main-menus');menus.replaceChildren();
+ data.menus.forEach(menu=>{const button=document.createElement('button');button.type='button';button.className='menu';const title=document.createElement('span');title.className='menu-title';title.textContent=menu.title;const description=document.createElement('span');description.className='menu-description';description.textContent=menu.description;const bottom=document.createElement('span');bottom.className='menu-bottom';const status=document.createElement('span');status.textContent=menu.url?'자료 보기':'준비 중';const arrow=document.createElement('span');arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');bottom.append(status,arrow);button.append(title,description,bottom);button.onclick=()=>openMenu(menu);menus.append(button);});
+ const guides=data.guides||[],guideList=root.querySelector('.guide-list');guideList.replaceChildren();
+ function openGuide(guide){show(guide.title,guide.paragraphs,'입문 가이드 · 초안');}
+ guides.forEach(guide=>{const button=document.createElement('button');button.type='button';button.className='guide-row';const category=document.createElement('span');category.className='guide-category';category.textContent=guide.category;const body=document.createElement('span'),title=document.createElement('strong'),description=document.createElement('span'),arrow=document.createElement('span');title.className='guide-title';title.textContent=guide.title;description.className='guide-description';description.textContent=guide.description;body.append(title,description);arrow.className='guide-arrow';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');button.append(category,body,arrow);button.onclick=()=>openGuide(guide);guideList.append(button);});
+ const resultPanel=root.querySelector('#search-results'),resultList=root.querySelector('#results-list');
+ const records=[...data.menus.map(menu=>({title:menu.title,description:menu.description,type:'메뉴',open:()=>openMenu(menu)})),...guides.map(guide=>({title:guide.title,description:guide.description,type:'가이드',open:()=>openGuide(guide)}))];
+ function search(){const q=input.value.trim().toLocaleLowerCase();resultPanel.hidden=!q;resultList.replaceChildren();if(!q)return;const matches=records.filter(r=>(r.title+' '+r.description).toLocaleLowerCase().includes(q));root.querySelector('#search-status').textContent=matches.length?`홈에 등록된 자료 ${matches.length}개를 찾았습니다.`:'일치하는 자료가 없습니다. 다른 이름으로 검색해보세요.';matches.forEach(record=>{const button=document.createElement('button');button.type='button';button.className='result-row';const tag=document.createElement('small'),title=document.createElement('span');tag.textContent=record.type;title.textContent=record.title;button.append(tag,title);button.onclick=record.open;resultList.append(button);});}
+ input.oninput=search;root.querySelector('.home-search').onsubmit=e=>{e.preventDefault();search();if(!resultPanel.hidden)resultPanel.scrollIntoView({block:'nearest'});};root.querySelector('#clear-search').onclick=()=>{input.value='';search();input.focus();};
  root.querySelector('#b-close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}};
 }
