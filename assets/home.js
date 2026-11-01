@@ -9,23 +9,7 @@ export function validate(data) {
   });
   return data;
 }
-export function render(data) {
-  validate(data);
-  document.querySelector('h1').textContent=data.heading;
-  document.querySelector('h1').style.whiteSpace='pre-line';
-  document.querySelector('.intro p').textContent=data.description;
-  document.querySelector('.beginner h2').textContent=data.beginnerTitle;
-  document.querySelector('.beginner p').textContent=data.beginnerDescription;
-  document.querySelector('.logrow p').textContent=data.updateText;
-  const date=document.querySelector('.logrow time');date.dateTime=data.updateDate;date.textContent=data.updateDate.replaceAll('-','.');
-  document.querySelectorAll('.card').forEach((card,i)=>{
-    const m=data.menus[i];card.querySelector('h3').textContent=m.title;card.querySelector('p').textContent=m.description;
-    card.dataset.title=m.title;card.dataset.terms=m.title+' '+m.description;
-    card.onclick=()=>{if(m.url)location.assign(m.url);else{document.querySelector('#title').textContent=m.title;document.querySelector('#dialog').showModal();}};
-  });
+export async function render(data){validate(data);const {mount}=await import('./site-runtime.js');mount(data);}
+if(typeof document!=='undefined'&&document.querySelector('#ss-blue-silver')){
+ window.__silverHomeReady=fetch(new URL('../data/home.json',import.meta.url),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('콘텐츠를 읽지 못했습니다.');return r.json();}).then(render).catch(e=>{console.error(e);document.querySelector('.b-intro').textContent='콘텐츠를 불러오지 못했습니다. 새로고침해주세요.';});
 }
-if(typeof document!=='undefined'&&document.querySelector('.intro')) {
-  window.__silverHomeReady = fetch(new URL('../data/home.json',import.meta.url),{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(render).catch(()=>console.warn('기본 홈 화면을 표시합니다.'));
-  addEventListener('message',e=>{if(e.origin===location.origin&&e.source===parent&&e.data?.type==='home-preview'){try{render(e.data.data);}catch{}}});
-}
-
