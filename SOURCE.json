@@ -1,0 +1,10 @@
+{
+  "repository": "MoonWhale-ko/silver-palace-guide",
+  "commit": "900ccc20df1ed192c4fcc2e289384cf85fb485bb",
+  "paths": [
+    "site.html",
+    "assets/home.js",
+    "data/home.json"
+  ],
+  "editorImplemented": true
+}
