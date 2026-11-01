@@ -44,3 +44,8 @@ html,body{margin:0;min-height:100%;scroll-behavior:smooth}body{background:#e9ebe
 #ss-blue-silver h1{margin-block:17px 15px;line-height:1}
 @media(max-width:900px){#ss-blue-silver .brand-logo{width:240px}}
 @media(max-width:640px){#ss-blue-silver .brand-logo{width:230px}#ss-blue-silver .brand{padding-bottom:7px}#ss-blue-silver .hero-logo{width:275px}#ss-blue-silver h1{margin-block:13px 12px}}
+
+/* Home navigation displays names only; descriptions remain searchable. */
+#ss-blue-silver .main-menus .menu-description,#ss-blue-silver .main-menus .menu-bottom{display:none}
+#ss-blue-silver .main-menus .menu{min-height:64px;justify-content:center}
+@media(max-width:640px){#ss-blue-silver .main-menus .menu{min-height:66px;padding-block:18px}#ss-blue-silver .main-menus .menu:last-child{display:flex;min-height:66px}}
