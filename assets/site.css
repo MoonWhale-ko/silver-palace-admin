@@ -49,3 +49,33 @@ html,body{margin:0;min-height:100%;scroll-behavior:smooth}body{background:#e9ebe
 #ss-blue-silver .main-menus .menu-description,#ss-blue-silver .main-menus .menu-bottom{display:none}
 #ss-blue-silver .main-menus .menu{min-height:64px;justify-content:center}
 @media(max-width:640px){#ss-blue-silver .main-menus .menu{min-height:66px;padding-block:18px}#ss-blue-silver .main-menus .menu:last-child{display:flex;min-height:66px}}
+
+/* Pending header revision: logo only; theme control in footer. */
+#ss-blue-silver .site-header{grid-template-columns:minmax(0,1fr)}
+#ss-blue-silver .site-header .brand{grid-column:1;grid-row:1;justify-self:center;margin:0}
+#ss-blue-silver .footer-links{align-items:center;flex-wrap:wrap}
+#ss-blue-silver .footer-links .theme{grid-column:auto;grid-row:auto;border:0;padding:7px 0;min-height:36px}
+/* Pending search design: right-offset desktop dialog and centered mobile dialog. */
+#ss-blue-silver .site-header{grid-template-columns:44px minmax(0,1fr) 44px}
+#ss-blue-silver .site-header .brand{grid-column:2}
+#ss-blue-silver .search-toggle{grid-column:3;grid-row:1;display:grid;place-items:center;width:44px;height:44px;padding:10px;border:0;background:none;color:var(--ink)}
+#ss-blue-silver .search-toggle:hover{background:var(--hover)}
+#ss-blue-silver #search-dialog{position:fixed;left:auto;right:max(24px,calc((100vw - 1240px)/2));top:115px;bottom:auto;margin:0;width:480px;max-width:calc(100vw - 48px);max-height:calc(100dvh - 145px);padding:20px 24px;border:1px solid var(--line);border-top:4px double var(--ink);border-bottom:4px double var(--ink);overscroll-behavior:contain}
+#ss-blue-silver #search-dialog::backdrop{background:#0b141e66}
+#ss-blue-silver .search-dialog-heading{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:12px}
+#ss-blue-silver #search-dialog h2{font-size:20px;margin:0}
+#ss-blue-silver #search-close{width:36px;height:36px;border:0;background:none;font-size:25px;padding:0;color:var(--muted)}
+#ss-blue-silver .popup-search{display:flex;gap:10px;align-items:center;border-bottom:1px solid var(--ink);padding:8px 0 13px}
+#ss-blue-silver .popup-search input{min-width:0;flex:1;width:100%;border:0;background:none;color:var(--ink);font-size:16px}
+#ss-blue-silver .popup-search input::placeholder{color:var(--muted)}
+#ss-blue-silver .popup-search>button{padding:7px 5px;border:0;background:none;font-size:12px;white-space:nowrap}
+#ss-blue-silver .search-list-heading{display:flex;justify-content:space-between;gap:15px;color:var(--muted);font-size:11px;margin:20px 0 9px}
+#ss-blue-silver .search-option{display:flex;align-items:stretch;gap:8px;min-height:38px}
+#ss-blue-silver .search-option:hover{background:var(--hover)}
+#ss-blue-silver .search-term{flex:1;min-width:0;text-align:left;overflow-wrap:anywhere;padding:7px 5px;border:0;background:none;font-size:14px}
+#ss-blue-silver .search-option-action{flex:none;align-self:center;min-width:36px;min-height:36px;padding:4px;border:0;background:none;color:var(--muted);font-size:20px}
+#ss-blue-silver #search-history-footer{border-top:1px solid var(--line);margin-top:14px;padding-top:9px;display:flex;justify-content:flex-end}
+#ss-blue-silver #history-clear{background:none;border:0;padding:8px 4px;font-size:12px;color:var(--muted)}
+#ss-blue-silver #history-clear:disabled{opacity:.45;cursor:default}
+#ss-blue-silver #search-dialog .search-empty{font-size:13px;color:var(--muted);margin:24px 4px}
+@media(max-width:640px){#ss-blue-silver .site-header .brand{grid-column:2;grid-row:1;padding-bottom:0}#ss-blue-silver .brand-logo{width:210px}#ss-blue-silver #search-dialog{inset:0;margin:auto;width:calc(100% - 32px);max-width:480px;max-height:calc(100dvh - 40px);padding:17px 20px}#ss-blue-silver .search-option{min-height:42px}#ss-blue-silver .search-option-action{min-width:42px;min-height:42px}}

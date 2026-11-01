@@ -1,3 +1,4 @@
+import {mountSearch} from './search-popup.js';
 export function mount(data){
  const root=document.getElementById('ss-blue-silver'),dialog=root.querySelector('#b-dialog'),input=root.querySelector('#b-search');
  const heading=root.querySelector('h1'),logo=heading.querySelector('img');if(logo)logo.alt=data.heading;else heading.textContent=data.heading;root.querySelector('.b-intro').textContent=data.description;
@@ -16,9 +17,7 @@ export function mount(data){
  const guides=data.guides||[],guideList=root.querySelector('.guide-list');guideList.replaceChildren();
  function openGuide(guide){show(guide.title,guide.paragraphs,'입문 가이드 · 초안');}
  guides.forEach(guide=>{const button=document.createElement('button');button.type='button';button.className='guide-row';const category=document.createElement('span');category.className='guide-category';category.textContent=guide.category;const body=document.createElement('span'),title=document.createElement('strong'),description=document.createElement('span'),arrow=document.createElement('span');title.className='guide-title';title.textContent=guide.title;description.className='guide-description';description.textContent=guide.description;body.append(title,description);arrow.className='guide-arrow';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');button.append(category,body,arrow);button.onclick=()=>openGuide(guide);guideList.append(button);});
- const resultPanel=root.querySelector('#search-results'),resultList=root.querySelector('#results-list');
  const records=[...data.menus.map(menu=>({title:menu.title,description:menu.description,type:'메뉴',open:()=>openMenu(menu)})),...guides.map(guide=>({title:guide.title,description:guide.description,type:'가이드',open:()=>openGuide(guide)}))];
- function search(){const q=input.value.trim().toLocaleLowerCase();resultPanel.hidden=!q;resultList.replaceChildren();if(!q)return;const matches=records.filter(r=>(r.title+' '+r.description).toLocaleLowerCase().includes(q));root.querySelector('#search-status').textContent=matches.length?`홈에 등록된 자료 ${matches.length}개를 찾았습니다.`:'일치하는 자료가 없습니다. 다른 이름으로 검색해보세요.';matches.forEach(record=>{const button=document.createElement('button');button.type='button';button.className='result-row';const tag=document.createElement('small'),title=document.createElement('span');tag.textContent=record.type;title.textContent=record.title;button.append(tag,title);button.onclick=record.open;resultList.append(button);});}
- input.oninput=search;root.querySelector('.home-search').onsubmit=e=>{e.preventDefault();search();if(!resultPanel.hidden)resultPanel.scrollIntoView({block:'nearest'});};root.querySelector('#clear-search').onclick=()=>{input.value='';search();input.focus();};
+ mountSearch(root,records);
  root.querySelector('#b-close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}};
 }
