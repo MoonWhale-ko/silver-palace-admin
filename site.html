@@ -5,7 +5,7 @@
 <header class="site-header"><a class="brand" href="./site.html"><img class="brand-logo" src="./assets/silver-stream-logo.webp" alt="실버 스트림" width="1000" height="332"></a><button type="button" id="search-toggle" class="search-toggle" aria-label="검색 열기" aria-haspopup="dialog" aria-controls="search-dialog"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button></header>
 <main id="main">
 <section class="hero" aria-labelledby="home-heading"><img class="hero-image" src="./assets/home-keyvisual.webp" alt="도시를 배경으로 모자를 쓴 실버팰리스 캐릭터" width="1300" height="731" fetchpriority="high"><div class="hero-shade"></div><div class="hero-copy"><span class="hero-label">실버팰리스 비공식 종합 가이드</span><h1 id="home-heading"><img class="hero-logo" src="./assets/silver-stream-logo.webp" alt="실버 스트림" width="1000" height="332"></h1><p class="b-intro">캐릭터, 장비, 육성과 공략.</p></div><span class="image-credit">이미지 · 실버팰리스 공식 사이트</span></section>
-<section id="search-results" class="search-results" aria-labelledby="search-heading" hidden><div class="section-heading"><h2 id="search-heading">검색 결과</h2><button type="button" id="clear-search">검색 닫기</button></div><p id="search-status" role="status" aria-live="polite"></p><div id="results-list"></div></section>
+<section id="search-results" class="search-results" aria-labelledby="search-heading" hidden><div class="section-heading"><h2 id="search-heading" tabindex="-1">검색 결과</h2><button type="button" id="clear-search">홈으로</button></div><p id="search-status" role="status" aria-live="polite"></p><div id="results-list"></div></section>
 <nav class="main-menus" aria-label="주요 메뉴"></nav>
 <section id="beginner" class="beginner" aria-labelledby="beginner-heading"><div class="beginner-intro"><span class="eyebrow">처음 시작한다면</span><h2 id="beginner-heading">입문 가이드</h2><p id="beginner-description"></p><span class="draft-note">작성 중인 가이드 초안</span></div><div class="guide-list"></div></section>
 <section class="site-note" aria-label="자료 안내"><span class="note-label">자료 안내</span><p>홈 화면과 자료 구성을 준비하고 있습니다. 게임 정보는 테스트 버전에 따라 달라질 수 있습니다.</p></section>
@@ -14,7 +14,7 @@
 <dialog id="search-dialog" aria-label="검색">
 <form role="search" class="popup-search"><label class="visually-hidden" for="b-search">사이트 자료 검색</label><input id="b-search" type="search" maxlength="200" placeholder="검색어를 입력하세요" autocomplete="off" enterkeyhint="search" aria-controls="search-options"><button type="submit" aria-label="검색 실행"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg></button></form>
 <div class="search-list-heading"><span id="search-list-title">최근 검색</span></div>
-<div id="search-options"></div><div id="search-history-footer"><button type="button" id="history-clear">기록 삭제</button></div>
+<div id="search-options"></div><hr class="search-history-rule"><div id="search-history-footer"><button type="button" id="history-clear">기록 삭제</button></div>
 </dialog>
 <dialog id="b-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span id="dialog-status">준비 중</span><button id="b-close" type="button" aria-label="닫기">닫기 ×</button></div><h2 id="dialog-title">안내</h2><div id="dialog-content"></div></dialog>
 <script type="module" src="./assets/home.js"></script>

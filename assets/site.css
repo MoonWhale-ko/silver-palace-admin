@@ -116,3 +116,23 @@ html,body{margin:0;min-height:100%;scroll-behavior:smooth}body{background:#e9ebe
 #ss-blue-silver #search-dialog::before{width:min(320px,calc(100% - 48px));aspect-ratio:1801/302;top:16px;mask-size:110.1055% auto;mask-position:center 23.218%;-webkit-mask-size:110.1055% auto;-webkit-mask-position:center 23.218%}
 #ss-blue-silver #search-dialog::after{width:130px;aspect-ratio:767/118;bottom:16px;mask-size:258.54% auto;mask-position:center 85.185%;-webkit-mask-size:258.54% auto;-webkit-mask-position:center 85.185%}
 @media(max-width:640px){#ss-blue-silver #search-dialog{height:540px;padding:90px 20px 54px}#ss-blue-silver #search-dialog::before,#ss-blue-silver #search-dialog::after{left:50%;right:auto}}
+/* Slim matching ornaments; preserve both inset single-line list separators. */
+#ss-blue-silver #search-dialog{padding:60px 24px;height:540px}
+#ss-blue-silver #search-dialog::before,#ss-blue-silver #search-dialog::after{width:min(320px,calc(100% - 48px));aspect-ratio:1782/118;mask-image:url('./search-ornament-thin.png');-webkit-mask-image:url('./search-ornament-thin.png');mask-size:121.8855% auto;-webkit-mask-size:121.8855% auto;mask-position:center center;-webkit-mask-position:center center}
+#ss-blue-silver #search-dialog::before{top:18px}
+#ss-blue-silver #search-dialog::after{bottom:18px;transform:translateX(-50%) scaleY(-1)}
+#ss-blue-silver .search-list-heading{border-bottom:1px solid var(--line);padding-bottom:10px;margin:20px 4px 8px}
+#ss-blue-silver #search-dialog .search-history-rule{flex-shrink:0;height:0;border:0;border-top:1px solid var(--line);padding:0;margin:12px 4px 9px}
+#ss-blue-silver #search-history-footer{margin-top:0;border:0;padding:0}
+@media(max-width:640px){#ss-blue-silver #search-dialog{height:540px;padding:60px 20px}}
+/* User-supplied ornament, identical above and below with vertical reflection. */
+#ss-blue-silver #search-dialog::before,#ss-blue-silver #search-dialog::after{width:min(280px,calc(100% - 48px));aspect-ratio:1828/216;mask-image:url('./search-ornament-approved.png');-webkit-mask-image:url('./search-ornament-approved.png');mask-size:108.4792% auto;-webkit-mask-size:108.4792% auto;mask-position:center 48.7002%;-webkit-mask-position:center 48.7002%}
+#ss-blue-silver #search-dialog::before{top:12px}
+#ss-blue-silver #search-dialog::after{bottom:12px;transform:translateX(-50%) scaleY(-1)}
+/* A submitted search opens its own result view, not the destination article. */
+#ss-blue-silver[data-view=results] main>:not(#search-results){display:none}
+#ss-blue-silver[data-view=results] .search-results{min-height:55vh;padding:28px 0 40px}
+#ss-blue-silver .result-row>span{display:flex;flex-direction:column;gap:4px}
+#ss-blue-silver .result-row strong{font-weight:500}
+#ss-blue-silver .result-row small{font-size:12px}
+#ss-blue-silver #search-heading:focus{outline:none}
