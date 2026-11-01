@@ -93,3 +93,26 @@ html,body{margin:0;min-height:100%;scroll-behavior:smooth}body{background:#e9ebe
 #ss-blue-silver .search-toggle,#ss-blue-silver .popup-search>button,#ss-blue-silver .search-option-action{border-radius:50%}
 #ss-blue-silver .search-toggle:focus-visible,#ss-blue-silver .popup-search>button:focus-visible,#ss-blue-silver .search-option-action:focus-visible{background:var(--hover)}
 @media(max-width:640px){#ss-blue-silver #search-dialog{padding:21px 20px 16px}#ss-blue-silver .popup-search>button{min-width:40px;min-height:40px}}
+
+/* The inset separator remains visible in both history and suggestion states. */
+#ss-blue-silver #search-dialog .search-separator{display:block;height:0;border:0;border-top:1px solid var(--line);margin:18px 4px 12px;padding:0}
+#ss-blue-silver #search-history-footer{border:0;margin:0 4px;padding:0}
+
+/* Fixed six-row composition, framed by inset printer's rules. */
+#ss-blue-silver #search-dialog{height:480px;padding:32px 24px 26px}
+#ss-blue-silver #search-dialog[open]{display:flex;flex-direction:column}
+#ss-blue-silver #search-dialog::before,#ss-blue-silver #search-dialog::after{content:'';position:absolute;left:24px;right:24px;height:0;border-top:3px double var(--ink);pointer-events:none}
+#ss-blue-silver #search-dialog::before{top:14px}
+#ss-blue-silver #search-dialog::after{bottom:14px}
+#ss-blue-silver .popup-search{flex-shrink:0}
+#ss-blue-silver .search-list-heading{flex-shrink:0;min-height:18px}
+#ss-blue-silver #search-options{height:252px;min-height:252px;flex-shrink:0}
+#ss-blue-silver .search-option{height:42px;min-height:42px}
+#ss-blue-silver #search-history-footer{margin-top:auto;min-height:36px;flex-shrink:0}
+@media(max-width:640px){#ss-blue-silver #search-dialog{height:480px;padding:32px 20px 26px}#ss-blue-silver #search-dialog::before,#ss-blue-silver #search-dialog::after{left:20px;right:20px}}
+/* Approved solid Victorian ornaments, displayed from the unchanged sprite. */
+#ss-blue-silver #search-dialog{height:540px;padding:90px 24px 54px}
+#ss-blue-silver #search-dialog::before,#ss-blue-silver #search-dialog::after{height:auto;left:50%;right:auto;transform:translateX(-50%);border:0;background:var(--ink);mask-image:url('./search-ornaments.png');mask-repeat:no-repeat;-webkit-mask-image:url('./search-ornaments.png');-webkit-mask-repeat:no-repeat}
+#ss-blue-silver #search-dialog::before{width:min(320px,calc(100% - 48px));aspect-ratio:1801/302;top:16px;mask-size:110.1055% auto;mask-position:center 23.218%;-webkit-mask-size:110.1055% auto;-webkit-mask-position:center 23.218%}
+#ss-blue-silver #search-dialog::after{width:130px;aspect-ratio:767/118;bottom:16px;mask-size:258.54% auto;mask-position:center 85.185%;-webkit-mask-size:258.54% auto;-webkit-mask-position:center 85.185%}
+@media(max-width:640px){#ss-blue-silver #search-dialog{height:540px;padding:90px 20px 54px}#ss-blue-silver #search-dialog::before,#ss-blue-silver #search-dialog::after{left:50%;right:auto}}
