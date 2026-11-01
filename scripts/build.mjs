@@ -8,7 +8,9 @@ await copyFile('index.html','dist/index.html');
 // Project Pages is served beneath /silver-palace-admin/.
 const html=await readFile('site.html','utf8');
 const {writeFile}=await import('node:fs/promises');
-await writeFile('dist/site.html',html.replaceAll('href="/"','href="./site.html"'));
+const {createHash}=await import('node:crypto');
+const cssVersion=createHash('sha256').update(await readFile('assets/site.css')).digest('hex').slice(0,12);
+await writeFile('dist/site.html',html.replaceAll('href="/"','href="./site.html"').replace('./assets/site.css','./assets/site.css?v='+cssVersion));
 for(const dir of ['assets','data','editor']) await cp(dir,'dist/'+dir,{recursive:true});
 console.log('사이트 dist 빌드 완료');
 
