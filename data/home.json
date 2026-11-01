@@ -7,22 +7,22 @@
   "updateDate": "2026-11-01",
   "menus": [
     {
-      "title": "캐릭터 도감",
+      "title": "캐릭터",
       "description": "캐릭터 정보와 스킬",
       "url": ""
     },
     {
-      "title": "장비 DB",
+      "title": "장비",
       "description": "장비 능력치와 효과",
       "url": ""
     },
     {
-      "title": "육성 가이드",
+      "title": "육성 매뉴얼",
       "description": "성장 순서와 재료",
       "url": ""
     },
     {
-      "title": "콘텐츠 공략",
+      "title": "공략집",
       "description": "탐험과 전투 공략",
       "url": ""
     },
