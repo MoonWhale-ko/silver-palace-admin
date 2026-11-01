@@ -37,3 +37,10 @@ html,body{margin:0;min-height:100%;scroll-behavior:smooth}body{background:#e9ebe
 #ss-blue-silver dialog{border-top:4px double var(--ink)}
 @media(max-width:900px){#ss-blue-silver .site-header{width:calc(100% - 52px);gap:14px}#ss-blue-silver .brand{font-size:35px}#ss-blue-silver .site-subtitle{max-width:130px;line-height:1.8}#ss-blue-silver .menu-title{font-size:17px}}
 @media(max-width:640px){#ss-blue-silver .site-header{width:calc(100% - 38px);margin:17px auto 17px;padding:13px 0 11px;grid-template-columns:1fr auto auto;gap:9px 13px}#ss-blue-silver .brand{grid-column:1/-1;grid-row:1;font-size:35px;margin:0;justify-self:center;padding:1px 0 9px}#ss-blue-silver .site-subtitle{display:block;grid-column:1;grid-row:2;font-size:9px;max-width:none;letter-spacing:0}#ss-blue-silver .header-guide{grid-column:2;grid-row:2;font-size:10px}#ss-blue-silver .theme{grid-column:3;grid-row:2;font-size:10px;padding-left:10px;min-height:30px}#ss-blue-silver h1{font-size:35px}#ss-blue-silver .hero-copy{padding-top:188px}#ss-blue-silver .home-search{padding-top:11px}#ss-blue-silver .main-menus{margin-top:15px;padding:0}#ss-blue-silver .menu-title{font-size:19px}#ss-blue-silver .menu{min-height:119px}#ss-blue-silver .menu:last-child{padding-block:18px}#ss-blue-silver .beginner{padding-top:27px;gap:22px}#ss-blue-silver .beginner h2{font-size:28px}#ss-blue-silver .beginner-intro h2:after{margin-top:12px}#ss-blue-silver .guide-title{font-size:14px}#ss-blue-silver .guide-row{padding-block:16px}}
+/* Restore the approved image wordmark instead of typeset branding. */
+#ss-blue-silver .brand-logo{display:block;width:270px;max-width:100%;height:auto;filter:brightness(0);opacity:.85}
+#ss-blue-silver[data-theme=dark] .brand-logo{filter:none;opacity:1}
+#ss-blue-silver .hero-logo{display:block;width:345px;max-width:100%;height:auto}
+#ss-blue-silver h1{margin-block:17px 15px;line-height:1}
+@media(max-width:900px){#ss-blue-silver .brand-logo{width:240px}}
+@media(max-width:640px){#ss-blue-silver .brand-logo{width:230px}#ss-blue-silver .brand{padding-bottom:7px}#ss-blue-silver .hero-logo{width:275px}#ss-blue-silver h1{margin-block:13px 12px}}

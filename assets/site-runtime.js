@@ -1,6 +1,6 @@
 export function mount(data){
  const root=document.getElementById('ss-blue-silver'),dialog=root.querySelector('#b-dialog'),input=root.querySelector('#b-search');
- root.querySelector('h1').textContent=data.heading;root.querySelector('.b-intro').textContent=data.description;
+ const heading=root.querySelector('h1'),logo=heading.querySelector('img');if(logo)logo.alt=data.heading;else heading.textContent=data.heading;root.querySelector('.b-intro').textContent=data.description;
  root.querySelector('#beginner-heading').textContent=data.beginnerTitle;root.querySelector('#beginner-description').textContent=data.beginnerDescription;
  const theme=root.querySelector('#b-theme');let dark=matchMedia('(prefers-color-scheme:dark)').matches;
  try{const saved=localStorage.getItem('sp-guide-theme');if(saved)dark=saved==='dark';}catch{}
