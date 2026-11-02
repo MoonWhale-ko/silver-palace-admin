@@ -141,3 +141,13 @@ html,body{margin:0;min-height:100%;scroll-behavior:smooth}body{background:#e9ebe
 #ss-blue-silver #search-dialog{height:540px;padding:60px 24px;border:0;border-radius:0;background:transparent url('./search-paper-parchment-960x1080.png') center/100% 100% no-repeat;color:#29343d;--ink:#29343d;--muted:#60604e;--line:#b8ad8d;--accent:#665730;--hover:#b9a46b26}
 #ss-blue-silver[data-theme=dark] #search-dialog{color:#29343d;--ink:#29343d;--muted:#60604e;--line:#b8ad8d;--accent:#665730;--hover:#b9a46b26}
 @media(max-width:640px){#ss-blue-silver #search-dialog{padding:60px 20px}}
+
+/* Solid central sheet; responsive width capped at 900px. */
+html,body{background:#dfe2e4}
+body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
+#ss-blue-silver{display:flow-root;width:100%;max-width:900px;margin-inline:auto;min-height:100dvh;background:#f5f0e5}
+#ss-blue-silver[data-theme=dark]{background:#292b29}
+#ss-blue-silver .site-header{max-width:none}
+#ss-blue-silver main,#ss-blue-silver .site-footer{width:100%;max-width:none}
+#ss-blue-silver #search-dialog{right:max(24px,calc((100vw - 900px)/2 + 24px))}
+@media(max-width:640px){#ss-blue-silver #search-dialog{inset:0;margin:auto}}
