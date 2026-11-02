@@ -348,3 +348,12 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v2-top.webp')}
 #ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v2-middle.webp')}
 #ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v2-bottom.webp')}
+
+/* Square, well-preserved aged paper; softly overlap joins to avoid a cut line. */
+#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v3-top.webp')}
+#ss-blue-silver>.page-paper>.paper-middle{
+ background-image:url('./page-paper-v3-middle.webp');margin-block:-6px;z-index:1;
+ mask-image:linear-gradient(transparent,#000 6px,#000 calc(100% - 6px),transparent);
+ -webkit-mask-image:linear-gradient(transparent,#000 6px,#000 calc(100% - 6px),transparent);
+}
+#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v3-bottom.webp')}
