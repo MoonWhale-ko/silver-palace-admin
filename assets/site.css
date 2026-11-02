@@ -369,3 +369,7 @@ html,body,body:has(#ss-blue-silver[data-theme=dark]){
  background-size:auto,900px auto;
  background-repeat:repeat;
 }
+
+/* Reserve the viewport scrollbar space while modal drawers lock scrolling. */
+html{scrollbar-gutter:stable}
+#ss-blue-silver dialog.header-menu-panel{right:max(0px,calc((100% - 900px)/2))}
