@@ -457,3 +457,7 @@ body{padding-block:24px}
 #ss-blue-silver .site-header .header-menu-toggle{padding:1px}
 #ss-blue-silver .site-header .search-toggle>svg,
 #ss-blue-silver .site-header .header-menu-toggle>svg{width:42px;height:42px}
+
+/* Adjust the two header controls independently, preserving their vertical offset. */
+#ss-blue-silver .site-header .search-toggle{transform:translate(-15px,-10px)}
+#ss-blue-silver .site-header .header-menu-toggle{transform:translate(-5px,-10px)}
