@@ -386,3 +386,13 @@ body{padding-block:24px}
 /* Keep the keyboard skip link hidden even with space above the sheet. */
 #ss-blue-silver .skip{position:fixed;top:0;transform:translateY(-150%)}
 #ss-blue-silver .skip:focus{transform:none}
+
+/* Age is expressed by oxidation and foxing, with intact square edges. */
+#ss-blue-silver{display:flex;flex-direction:column;min-height:max(2200px,calc(100dvh - 48px))}
+#ss-blue-silver>.site-header{flex-shrink:0}
+#ss-blue-silver>main{flex:1}
+#ss-blue-silver>.site-footer{flex-shrink:0}
+#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v5-top.webp')}
+#ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v5-middle.webp')}
+#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v5-bottom.webp')}
+@media(max-width:640px){#ss-blue-silver{min-height:max(1800px,calc(100dvh - 32px))}}
