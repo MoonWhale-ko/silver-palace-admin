@@ -180,3 +180,12 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 /* Balance lower rule weight and refine logo alignment. */
 #ss-blue-silver .masthead-lower{background-size:100% 1.5px}
 #ss-blue-silver .site-header .brand{transform:translateY(-12.5px)}
+
+/* Content boundaries are independent of the 900px background sheet. */
+#ss-blue-silver .site-header,#ss-blue-silver main,#ss-blue-silver .site-footer{width:calc(100% - 40px);max-width:840px;margin-inline:auto}
+#ss-blue-silver main,#ss-blue-silver .site-footer{padding-inline:0}
+#ss-blue-silver .site-header{grid-template-columns:44px minmax(0,1fr) 44px}
+#ss-blue-silver #search-dialog{right:max(20px,calc((100vw - 840px)/2))}
+@media(max-width:640px){#ss-blue-silver #search-dialog{inset:0;margin:auto}}
+/* Leave 20px between the sheet top and the upper masthead ornament. */
+#ss-blue-silver .site-header{margin-top:20px}
