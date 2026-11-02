@@ -196,3 +196,7 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver .hero-welcome .welcome-link{position:absolute;left:26px;bottom:23px;z-index:1;color:#fff;font:400 27px/1.5 MapoGoldenPier,serif;text-decoration:none;text-shadow:0 1px 5px #000b,0 0 16px #0009;padding:4px 0}
 #ss-blue-silver .hero-welcome .welcome-link:hover{text-decoration:underline;text-underline-offset:6px}
 @media(max-width:640px){#ss-blue-silver .hero-welcome .welcome-link{left:16px;bottom:12px;font-size:20px}}
+
+/* Scale the two-line welcome caption with the artwork itself. */
+#ss-blue-silver .hero.hero-welcome{container-type:inline-size}
+#ss-blue-silver .hero-welcome .welcome-link{left:10px;bottom:24%;padding:0;line-height:1.25;font-size:clamp(12px,3.214cqw,27px)}
