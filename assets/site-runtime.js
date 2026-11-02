@@ -22,13 +22,17 @@ export function mount(data){
  guides.forEach(guide=>{const button=document.createElement('button');button.type='button';button.className='guide-row';const category=document.createElement('span');category.className='guide-category';category.textContent=guide.category;const body=document.createElement('span'),title=document.createElement('strong'),description=document.createElement('span'),arrow=document.createElement('span');title.className='guide-title';title.textContent=guide.title;description.className='guide-description';description.textContent=guide.description;body.append(title,description);arrow.className='guide-arrow';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');button.append(category,body,arrow);button.onclick=()=>openGuide(guide);guideList.append(button);});
  const records=[...data.menus.map(menu=>({title:menu.title,description:menu.description,type:'메뉴',open:()=>openMenu(menu)})),...guides.map(guide=>({title:guide.title,description:guide.description,type:'가이드',open:()=>openGuide(guide)}))];
 
- const menuToggle=root.querySelector('#header-menu-toggle'),menuPanel=root.querySelector('#header-menu-panel');
- function closeHeaderMenu(){menuPanel.hidden=true;menuToggle.setAttribute('aria-expanded','false');}
- data.menus.forEach(menu=>{const item=document.createElement('button');item.type='button';item.textContent=menu.title;item.onclick=()=>{closeHeaderMenu();openMenu(menu);};menuPanel.append(item);});
- menuToggle.onclick=()=>{const open=menuPanel.hidden;menuPanel.hidden=!open;menuToggle.setAttribute('aria-expanded',String(open));};
- document.addEventListener('click',e=>{if(!menuPanel.contains(e.target)&&!menuToggle.contains(e.target))closeHeaderMenu();});
- root.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menuPanel.hidden){closeHeaderMenu();menuToggle.focus();}});
-
+ const menuToggle=root.querySelector('#header-menu-toggle'),menuPanel=root.querySelector('#header-menu-panel'),drawerItems=menuPanel.querySelector('.drawer-items');
+ let previousOverflow='';
+ function closeHeaderMenu(){if(menuPanel.open)menuPanel.close();}
+ function addDrawerItem(title,iconName,action){const item=document.createElement('button');item.type='button';item.className='drawer-item';const icon=document.createElement('span');icon.className='drawer-icon';icon.setAttribute('aria-hidden','true');icon.style.setProperty('--menu-icon',`url("${new URL(`./menu-${iconName}.png`,import.meta.url).href}")`);const label=document.createElement('span');label.textContent=title;item.append(icon,label);item.onclick=()=>{closeHeaderMenu();action();};drawerItems.append(item);}
+ drawerItems.replaceChildren();
+ for(const title of ['캐릭터','동기','장비','이잘키','공략집','육성 계산기']){const menu=data.menus.find(m=>m.title===title);if(menu)addDrawerItem(title==='공략집'?'공략':title,title==='동기'?'motive':title==='장비'?'equipment':'character',()=>openMenu(menu));}
+ addDrawerItem('입문 가이드','character',revealBeginner);
+ menuToggle.onclick=()=>{if(menuPanel.open){closeHeaderMenu();return;}previousOverflow=document.documentElement.style.overflow;menuPanel.showModal();menuToggle.setAttribute('aria-expanded','true');document.documentElement.style.overflow='hidden';};
+ menuPanel.addEventListener('close',()=>{menuToggle.setAttribute('aria-expanded','false');document.documentElement.style.overflow=previousOverflow;});
+ root.querySelector('#header-menu-close').onclick=closeHeaderMenu;
+ menuPanel.addEventListener('click',e=>{if(e.target!==menuPanel)return;const b=menuPanel.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)closeHeaderMenu();});
  mountSearch(root,records);
  root.querySelector('#b-close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}};
 }

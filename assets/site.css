@@ -262,3 +262,20 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver .header-menu-panel button:hover{background:var(--hover)}
 #ss-blue-silver .site-header .brand{min-width:0;max-width:100%}
 #ss-blue-silver .site-header .brand-logo{max-width:100%}
+
+/* Temporary solid background for the full-height right-side navigation drawer. */
+#ss-blue-silver dialog.header-menu-panel{position:fixed;inset:0 0 0 auto;width:340px;max-width:calc(100vw - 36px);height:100dvh;max-height:100dvh;margin:0;padding:26px 24px 24px;border:0;background:#f5f0e5;color:var(--ink);overflow:auto;overscroll-behavior:contain}
+#ss-blue-silver dialog.header-menu-panel[open]{display:flex;flex-direction:column;animation:drawer-enter .2s ease-out}
+#ss-blue-silver[data-theme=dark] dialog.header-menu-panel{background:#292b29}
+#ss-blue-silver dialog.header-menu-panel::backdrop{background:#080d15a6}
+#ss-blue-silver .drawer-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;font:400 23px/1.5 MapoGoldenPier,serif}
+#ss-blue-silver .header-menu-panel #header-menu-close{width:36px;min-height:36px;padding:0;text-align:center;font-size:28px}
+#ss-blue-silver .drawer-items{display:flex;flex-direction:column;gap:5px}
+#ss-blue-silver .header-menu-panel .drawer-item{display:flex;align-items:center;gap:18px;min-height:58px;width:100%;padding:10px 12px;text-align:left;font-size:17px}
+#ss-blue-silver .drawer-icon{display:block;flex:none;width:32px;height:32px;background:var(--ink);mask:var(--menu-icon) center/contain no-repeat;-webkit-mask:var(--menu-icon) center/contain no-repeat}
+#ss-blue-silver .drawer-footer{margin-top:auto;padding:28px 12px 0}
+#ss-blue-silver .drawer-links{display:flex;gap:22px;font-size:12px;color:var(--muted)}
+#ss-blue-silver .drawer-links a{text-decoration:none}
+#ss-blue-silver .drawer-version{display:block;margin-top:14px;font-size:11px;color:var(--muted)}
+@keyframes drawer-enter{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){#ss-blue-silver dialog.header-menu-panel[open]{animation:none}}
