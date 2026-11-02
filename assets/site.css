@@ -317,3 +317,20 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 }
 #ss-blue-silver dialog.header-menu-panel::before{left:7.65%;top:8px;bottom:8px}
 #ss-blue-silver dialog.header-menu-panel::after{left:8.3%;top:11px;bottom:11px;border-color:#9c824c}
+
+/* Keep the gold frame inside the cover and place the ribbon above it.
+   Sample only plain cloth; the original full-height gold rules are off canvas. */
+#ss-blue-silver dialog.header-menu-panel,
+#ss-blue-silver[data-theme=dark] dialog.header-menu-panel{
+ background-image:linear-gradient(90deg,#03101c 0px,#294354 3px,#081b2b 6px,#122c3d 11px,#020d18 16px,#071b2bd9 20px,transparent 24px),url('./drawer-cover-middle.webp');
+ background-size:100% 100%,125% 100%;
+ background-position:left top,right top;
+ background-repeat:no-repeat;
+ isolation:isolate;
+}
+#ss-blue-silver dialog.header-menu-panel::before,
+#ss-blue-silver dialog.header-menu-panel::after{
+ z-index:-1;border-left:1px solid #c7a95f;
+}
+#ss-blue-silver dialog.header-menu-panel::after{border-left-color:#9c824c}
+#ss-blue-silver .drawer-bookmark{z-index:2}
