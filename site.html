@@ -6,9 +6,10 @@
 <main id="main">
 <section class="hero hero-welcome" aria-label="실버팰리스 입문 안내"><img class="hero-image" src="./assets/home-welcome.png" alt="푸른 배경 속 실버팰리스 탐정과 캐릭터들" width="1280" height="695" fetchpriority="high"><div hidden><h1 id="home-heading">실버 스트림</h1><p class="b-intro"></p></div><a class="welcome-link" href="#beginner">처음<br>오셨나요?</a></section>
 <section id="search-results" class="search-results" aria-labelledby="search-heading" hidden><div class="section-heading"><h2 id="search-heading" tabindex="-1">검색 결과</h2><button type="button" id="clear-search">홈으로</button></div><p id="search-status" role="status" aria-live="polite"></p><div id="results-list"></div></section>
+<section class="guide-shortcuts" aria-label="가이드 바로가기"><button id="beginner-entry" type="button" class="beginner-entry" aria-controls="beginner" aria-expanded="false">입문 가이드 <span aria-hidden="true">↗</span></button><div class="additional-guide-space" aria-hidden="true"></div></section>
 <nav class="main-menus" aria-label="주요 메뉴"></nav>
-<section id="beginner" class="beginner" aria-labelledby="beginner-heading"><div class="beginner-intro"><span class="eyebrow">처음 시작한다면</span><h2 id="beginner-heading">입문 가이드</h2><p id="beginner-description"></p><span class="draft-note">작성 중인 가이드 초안</span></div><div class="guide-list"></div></section>
-<section class="site-note" aria-label="자료 안내"><span class="note-label">자료 안내</span><p>홈 화면과 자료 구성을 준비하고 있습니다. 게임 정보는 테스트 버전에 따라 달라질 수 있습니다.</p></section>
+<section id="beginner" hidden class="beginner" aria-labelledby="beginner-heading"><div class="beginner-intro"><span class="eyebrow">처음 시작한다면</span><h2 id="beginner-heading">입문 가이드</h2><p id="beginner-description"></p><span class="draft-note">작성 중인 가이드 초안</span></div><div class="guide-list"></div></section>
+<section hidden class="site-note" aria-label="자료 안내"><span class="note-label">자료 안내</span><p>홈 화면과 자료 구성을 준비하고 있습니다. 게임 정보는 테스트 버전에 따라 달라질 수 있습니다.</p></section>
 </main>
 <footer class="site-footer"><div><span class="footer-brand">실버 스트림</span><p>실버팰리스 비공식 정보 사이트 · 게임 이미지의 권리는 원저작권자에게 있습니다.</p></div><div class="footer-links"><button type="button" id="b-theme" class="theme">다크 모드</button><a href="https://silverpalace.elementagames.com/ko-kr/news" target="_blank" rel="noopener noreferrer">공식 사이트 ↗</a><a href="https://github.com/MoonWhale-ko/silver-palace-admin/issues" target="_blank" rel="noopener noreferrer">오류 제보 ↗</a></div></footer>
 <dialog id="search-dialog" aria-label="검색">

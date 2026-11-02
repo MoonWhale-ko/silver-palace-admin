@@ -3,6 +3,10 @@ export function mount(data){
  const root=document.getElementById('ss-blue-silver'),dialog=root.querySelector('#b-dialog'),input=root.querySelector('#b-search');
  const heading=root.querySelector('h1'),logo=heading.querySelector('img');if(logo)logo.alt=data.heading;else heading.textContent=data.heading;root.querySelector('.b-intro').textContent=data.description;
  root.querySelector('#beginner-heading').textContent=data.beginnerTitle;root.querySelector('#beginner-description').textContent=data.beginnerDescription;
+ const beginnerEntry=root.querySelector('#beginner-entry');
+ function revealBeginner(){const section=root.querySelector('#beginner');section.hidden=false;beginnerEntry.setAttribute('aria-expanded','true');section.scrollIntoView({behavior:'smooth',block:'start'});}
+ beginnerEntry.onclick=revealBeginner;
+ root.querySelector('.welcome-link').onclick=e=>{e.preventDefault();revealBeginner();};
  const theme=root.querySelector('#b-theme');let dark=matchMedia('(prefers-color-scheme:dark)').matches;
  try{const saved=localStorage.getItem('sp-guide-theme');if(saved)dark=saved==='dark';}catch{}
  function paint(){root.dataset.theme=dark?'dark':'light';document.documentElement.style.colorScheme=dark?'dark':'light';document.body.style.background=dark?'#1b2026':'#e9ebed';theme.textContent=dark?'라이트 모드':'다크 모드';theme.setAttribute('aria-pressed',String(dark));}
