@@ -33,6 +33,7 @@ export function mount(data){
  menuPanel.addEventListener('close',()=>{menuToggle.setAttribute('aria-expanded','false');document.documentElement.style.overflow=previousOverflow;});
  menuPanel.addEventListener('cancel',e=>e.preventDefault());
  menuPanel.addEventListener('click',e=>{if(e.target!==menuPanel)return;const b=menuPanel.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)closeHeaderMenu();});
+ root.querySelector('#term-guide-open').onclick=()=>show('용어 가이드',['용어 가이드는 준비 중입니다.']);
  mountSearch(root,records);
  root.querySelector('#b-close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}};
  // Keep the paper section joins on the printed dividers as the layout resizes.

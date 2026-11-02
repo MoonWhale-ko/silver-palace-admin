@@ -443,3 +443,11 @@ body{padding-block:24px}
  background-size:100% auto;margin-block:0;mask:none;-webkit-mask:none;
 }
 #ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-original-v11.webp');background-position:center bottom;background-size:100% auto}
+
+/* Terminology guide entry directly below the six main menus. */
+#ss-blue-silver .term-guide{position:relative;padding:24px 0}
+#ss-blue-silver .term-guide>button{display:flex;align-items:center;justify-content:space-between;gap:20px;width:100%;padding:16px 12px;border:0;background:none;color:var(--ink);text-align:left;font:400 24px/1.5 MapoGoldenPier,serif}
+#ss-blue-silver .term-guide>button:hover{background:var(--hover)}
+#ss-blue-silver .term-guide-arrow{font:400 19px/1.5 Pretendard,sans-serif}
+#ss-blue-silver .term-guide::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:5px;pointer-events:none;background:var(--ink);mask:url('./divider-diamond.svg') center/100% 5px no-repeat;-webkit-mask:url('./divider-diamond.svg') center/100% 5px no-repeat}
+@media(max-width:640px){#ss-blue-silver .term-guide{padding:18px 0}#ss-blue-silver .term-guide>button{font-size:21px;padding:14px 8px}}
