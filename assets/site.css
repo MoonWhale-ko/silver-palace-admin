@@ -412,3 +412,10 @@ body{padding-block:24px}
  -webkit-mask-image:linear-gradient(transparent,#000 12px,#000 calc(100% - 12px),transparent);
 }
 #ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v7-bottom.webp')}
+
+/* Full-width paper with only minute edge aging, without inset transparent margins. */
+#ss-blue-silver{width:100%;max-width:900px}
+#ss-blue-silver>.page-paper{left:0;right:0}
+#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v8-top.webp')}
+#ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v8-middle.webp')}
+#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v8-bottom.webp')}
