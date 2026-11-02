@@ -200,3 +200,6 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 /* Scale the two-line welcome caption with the artwork itself. */
 #ss-blue-silver .hero.hero-welcome{container-type:inline-size}
 #ss-blue-silver .hero-welcome .welcome-link{left:10px;bottom:24%;padding:0;line-height:1.25;font-size:clamp(12px,3.214cqw,27px)}
+
+/* Shift welcome caption 10px right and 30px up. */
+#ss-blue-silver .hero-welcome .welcome-link{left:20px;bottom:calc(24% + 30px)}
