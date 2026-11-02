@@ -245,3 +245,6 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 
 /* Reduce navigation icons by 25 percent. */
 #ss-blue-silver .menu-icon{width:min(66px,75%)}
+
+/* Lift the menu top by 20px while keeping its lower divider fixed. */
+#ss-blue-silver .main-menus{margin-top:-20px;padding-bottom:36px}
