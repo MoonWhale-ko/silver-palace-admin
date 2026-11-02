@@ -217,3 +217,10 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver .main-menus::after,#ss-blue-silver .site-note::after,#ss-blue-silver .guide-row::after{bottom:-2px}
 #ss-blue-silver .site-note::before,#ss-blue-silver .guide-list::before{top:-2px}
 #ss-blue-silver .guide-list{position:relative}
+
+/* Responsive vector: fixed 1.5px stroke and 8 x 5px terminals. */
+#ss-blue-silver .masthead-lower,#ss-blue-silver .main-menus::after,#ss-blue-silver .site-note::before,#ss-blue-silver .site-note::after,#ss-blue-silver .guide-row::after,#ss-blue-silver .guide-list::before{height:5px;background:var(--ink);mask:url('./divider-diamond.svg') center/100% 5px no-repeat;-webkit-mask:url('./divider-diamond.svg') center/100% 5px no-repeat}
+#ss-blue-silver .masthead-lower::before,#ss-blue-silver .masthead-lower::after{content:none}
+/* Frame the menu with horizontal rules only. */
+#ss-blue-silver .main-menus::before{content:'';position:absolute;top:-2px;left:0;right:0;height:5px;pointer-events:none;background:var(--ink);mask:url('./divider-diamond.svg') center/100% 5px no-repeat;-webkit-mask:url('./divider-diamond.svg') center/100% 5px no-repeat}
+#ss-blue-silver .main-menus .menu,#ss-blue-silver .main-menus .menu:not(:nth-child(3n+1)){border-left:0;border-right:0}
