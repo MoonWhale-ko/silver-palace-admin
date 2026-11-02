@@ -176,3 +176,7 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver .masthead-lower::after{right:0}
 /* Raise only the logo and search control, leaving the rules fixed. */
 #ss-blue-silver .site-header .brand,#ss-blue-silver .site-header .search-toggle{transform:translateY(-10px)}
+
+/* Balance lower rule weight and refine logo alignment. */
+#ss-blue-silver .masthead-lower{background-size:100% 1.5px}
+#ss-blue-silver .site-header .brand{transform:translateY(-12.5px)}
