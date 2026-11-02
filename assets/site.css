@@ -248,3 +248,17 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 
 /* Lift the menu top by 20px while keeping its lower divider fixed. */
 #ss-blue-silver .main-menus{margin-top:-20px;padding-bottom:36px}
+
+#ss-blue-silver .main-menus{margin-top:-99px;padding-bottom:115px}
+@media(max-width:640px){#ss-blue-silver .main-menus{margin-top:-93px;padding-bottom:109px}}
+
+/* Header navigation beside search; keep the wordmark centered. */
+#ss-blue-silver .site-header{grid-template-columns:88px minmax(0,1fr) 88px}
+#ss-blue-silver .site-header .search-toggle{justify-self:start}
+#ss-blue-silver .header-menu-toggle{grid-column:3;grid-row:1;justify-self:end;display:grid;place-items:center;width:44px;height:44px;padding:10px;border:0;background:none;color:var(--ink);transform:translateY(-10px)}
+#ss-blue-silver .header-menu-toggle:hover,#ss-blue-silver .header-menu-toggle:focus-visible{background:var(--hover)}
+#ss-blue-silver .header-menu-panel{position:absolute;right:0;top:calc(100% - 15px);z-index:20;width:190px;padding:10px;background:var(--surface);border:1px solid var(--line)}
+#ss-blue-silver .header-menu-panel button{display:block;width:100%;padding:10px 12px;text-align:left;border:0;background:none;color:var(--ink)}
+#ss-blue-silver .header-menu-panel button:hover{background:var(--hover)}
+#ss-blue-silver .site-header .brand{min-width:0;max-width:100%}
+#ss-blue-silver .site-header .brand-logo{max-width:100%}

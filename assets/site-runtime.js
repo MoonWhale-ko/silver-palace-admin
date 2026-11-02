@@ -21,6 +21,14 @@ export function mount(data){
  function openGuide(guide){show(guide.title,guide.paragraphs,'입문 가이드 · 초안');}
  guides.forEach(guide=>{const button=document.createElement('button');button.type='button';button.className='guide-row';const category=document.createElement('span');category.className='guide-category';category.textContent=guide.category;const body=document.createElement('span'),title=document.createElement('strong'),description=document.createElement('span'),arrow=document.createElement('span');title.className='guide-title';title.textContent=guide.title;description.className='guide-description';description.textContent=guide.description;body.append(title,description);arrow.className='guide-arrow';arrow.textContent='↗';arrow.setAttribute('aria-hidden','true');button.append(category,body,arrow);button.onclick=()=>openGuide(guide);guideList.append(button);});
  const records=[...data.menus.map(menu=>({title:menu.title,description:menu.description,type:'메뉴',open:()=>openMenu(menu)})),...guides.map(guide=>({title:guide.title,description:guide.description,type:'가이드',open:()=>openGuide(guide)}))];
+
+ const menuToggle=root.querySelector('#header-menu-toggle'),menuPanel=root.querySelector('#header-menu-panel');
+ function closeHeaderMenu(){menuPanel.hidden=true;menuToggle.setAttribute('aria-expanded','false');}
+ data.menus.forEach(menu=>{const item=document.createElement('button');item.type='button';item.textContent=menu.title;item.onclick=()=>{closeHeaderMenu();openMenu(menu);};menuPanel.append(item);});
+ menuToggle.onclick=()=>{const open=menuPanel.hidden;menuPanel.hidden=!open;menuToggle.setAttribute('aria-expanded',String(open));};
+ document.addEventListener('click',e=>{if(!menuPanel.contains(e.target)&&!menuToggle.contains(e.target))closeHeaderMenu();});
+ root.addEventListener('keydown',e=>{if(e.key==='Escape'&&!menuPanel.hidden){closeHeaderMenu();menuToggle.focus();}});
+
  mountSearch(root,records);
  root.querySelector('#b-close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}};
 }
