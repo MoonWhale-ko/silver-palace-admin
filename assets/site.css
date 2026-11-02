@@ -334,3 +334,17 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 }
 #ss-blue-silver dialog.header-menu-panel::after{border-left-color:#9c824c}
 #ss-blue-silver .drawer-bookmark{z-index:2}
+
+/* Three sections cut from one continuous parchment original. */
+#ss-blue-silver,#ss-blue-silver[data-theme=dark]{
+ position:relative;isolation:isolate;background:transparent;
+ --ink:#29343d;--muted:#60604e;--line:#b8ad8d;--accent:#665730;--hover:#b9a46b26;
+}
+#ss-blue-silver>.page-paper{
+ position:absolute;inset:0;z-index:-1;pointer-events:none;
+ display:grid;grid-template-rows:min(13.333vw,120px) minmax(0,1fr) min(13.333vw,120px);
+}
+#ss-blue-silver>.page-paper>span{display:block;background-position:center;background-size:100% 100%;background-repeat:no-repeat}
+#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v2-top.webp')}
+#ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v2-middle.webp')}
+#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v2-bottom.webp')}
