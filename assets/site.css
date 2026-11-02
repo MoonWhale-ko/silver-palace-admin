@@ -151,3 +151,20 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver main,#ss-blue-silver .site-footer{width:100%;max-width:none}
 #ss-blue-silver #search-dialog{right:max(24px,calc((100vw - 900px)/2 + 24px))}
 @media(max-width:640px){#ss-blue-silver #search-dialog{inset:0;margin:auto}}
+
+/* Approved printed masthead: 860px rule, 160px central crest. */
+#ss-blue-silver .site-header{position:relative;width:calc(100% - 40px);max-width:860px;border:0;padding:51px 0 26px;margin:20px auto}
+#ss-blue-silver .masthead-upper{position:absolute;top:0;left:0;width:100%;height:32px;display:flex;align-items:center;pointer-events:none}
+#ss-blue-silver .masthead-upper::before,#ss-blue-silver .masthead-upper::after{content:'';height:1px;background:var(--ink);flex:1}
+#ss-blue-silver .masthead-wing{display:block;flex:0 0 160px;height:32px;background:var(--ink);mask:url('./masthead-upper.png') center 49.7%/550px auto no-repeat;-webkit-mask:url('./masthead-upper.png') center 49.7%/550px auto no-repeat}
+#ss-blue-silver .masthead-upper{background:linear-gradient(var(--ink),var(--ink)) left center/8px 1px no-repeat}
+#ss-blue-silver .masthead-upper::before{clip-path:polygon(0 50%,4px 0,8px 50%,4px 100%,0 50%,100% 50%,100% 100%,0 100%);height:5px;background:linear-gradient(var(--ink),var(--ink)) center/100% 1px no-repeat}
+#ss-blue-silver .masthead-upper::after{height:5px;background:linear-gradient(var(--ink),var(--ink)) center/100% 1px no-repeat}
+#ss-blue-silver .masthead-lower{position:absolute;bottom:0;left:0;width:100%;height:10px;pointer-events:none;background:var(--ink);mask:url('./masthead-lower.png') center 49.5%/103% auto no-repeat;-webkit-mask:url('./masthead-lower.png') center 49.5%/103% auto no-repeat}
+@media(max-width:640px){#ss-blue-silver .site-header{width:calc(100% - 40px);padding:46px 0 23px;grid-template-columns:44px minmax(0,1fr) 44px}}
+/* Keep both upper rule segments straight and match their terminal diamonds. */
+#ss-blue-silver .masthead-upper{background:none}
+#ss-blue-silver .masthead-upper::before,#ss-blue-silver .masthead-upper::after{clip-path:none;height:1px;background:var(--ink)}
+#ss-blue-silver .masthead-upper .masthead-tip{position:absolute;top:13.5px;width:8px;height:5px;background:var(--ink);clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)}
+#ss-blue-silver .masthead-tip:first-child{left:0}
+#ss-blue-silver .masthead-tip:last-child{right:0}
