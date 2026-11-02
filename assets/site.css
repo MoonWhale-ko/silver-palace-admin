@@ -451,3 +451,9 @@ body{padding-block:24px}
 #ss-blue-silver .term-guide-arrow{font:400 19px/1.5 Pretendard,sans-serif}
 #ss-blue-silver .term-guide::after{content:'';position:absolute;bottom:-2px;left:0;right:0;height:5px;pointer-events:none;background:var(--ink);mask:url('./divider-diamond.svg') center/100% 5px no-repeat;-webkit-mask:url('./divider-diamond.svg') center/100% 5px no-repeat}
 @media(max-width:640px){#ss-blue-silver .term-guide{padding:18px 0}#ss-blue-silver .term-guide>button{font-size:21px;padding:14px 8px}}
+
+/* Double only the two header glyphs: 21px to 42px. */
+#ss-blue-silver .site-header .search-toggle,
+#ss-blue-silver .site-header .header-menu-toggle{padding:1px}
+#ss-blue-silver .site-header .search-toggle>svg,
+#ss-blue-silver .site-header .header-menu-toggle>svg{width:42px;height:42px}
