@@ -189,3 +189,10 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 @media(max-width:640px){#ss-blue-silver #search-dialog{inset:0;margin:auto}}
 /* Leave 20px between the sheet top and the upper masthead ornament. */
 #ss-blue-silver .site-header{margin-top:20px}
+
+/* Welcome artwork: hide the bottom color bands without stretching the picture. */
+#ss-blue-silver .hero.hero-welcome{min-height:0;height:auto;aspect-ratio:1280/647;isolation:isolate;overflow:hidden;background:#192731}
+#ss-blue-silver .hero-welcome .hero-image{position:absolute;inset:0 auto auto 0;width:100%;height:auto;max-width:none;object-fit:initial;object-position:initial;z-index:0}
+#ss-blue-silver .hero-welcome .welcome-link{position:absolute;left:26px;bottom:23px;z-index:1;color:#fff;font:400 27px/1.5 MapoGoldenPier,serif;text-decoration:none;text-shadow:0 1px 5px #000b,0 0 16px #0009;padding:4px 0}
+#ss-blue-silver .hero-welcome .welcome-link:hover{text-decoration:underline;text-underline-offset:6px}
+@media(max-width:640px){#ss-blue-silver .hero-welcome .welcome-link{left:16px;bottom:12px;font-size:20px}}
