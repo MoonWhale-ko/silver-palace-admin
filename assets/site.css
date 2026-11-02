@@ -279,3 +279,23 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver .drawer-version{display:block;margin-top:14px;font-size:11px;color:var(--muted)}
 @keyframes drawer-enter{from{transform:translateX(100%)}to{transform:translateX(0)}}
 @media(prefers-reduced-motion:reduce){#ss-blue-silver dialog.header-menu-panel[open]{animation:none}}
+
+/* Separate bookcloth caps and repeatable body keep the cover responsive. */
+#ss-blue-silver dialog.header-menu-panel,
+#ss-blue-silver[data-theme=dark] dialog.header-menu-panel{
+ --ink:#d8b56f;--muted:#bf9b5a;--hover:#d8b56f18;
+ color:var(--ink);background-color:#071b2c;
+ background-image:url('./drawer-cover-top.webp'),url('./drawer-cover-bottom.webp'),url('./drawer-cover-middle.webp');
+ background-position:left top,left bottom,left top;
+ background-size:100% auto,100% auto,100% auto;
+ background-repeat:no-repeat,no-repeat,repeat-y;
+ padding-left:36px;padding-bottom:36px;
+}
+#ss-blue-silver .drawer-heading{position:static}
+#ss-blue-silver .drawer-bookmark{position:absolute;right:24px;top:0;width:32px;height:268px;pointer-events:none;background:url('./drawer-bookmark.webp') center top/395% 101.1% no-repeat;clip-path:none}
+#ss-blue-silver .drawer-links a{color:var(--muted)}
+#ss-blue-silver .header-menu-panel .drawer-item{color:var(--ink)}
+
+/* Align the drawer with the 900px sheet, including full-width mobile. */
+#ss-blue-silver dialog.header-menu-panel{right:max(0px,calc((100vw - 900px)/2))}
+

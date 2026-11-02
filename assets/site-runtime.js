@@ -31,7 +31,7 @@ export function mount(data){
  addDrawerItem('입문 가이드','character',revealBeginner);
  menuToggle.onclick=()=>{if(menuPanel.open){closeHeaderMenu();return;}previousOverflow=document.documentElement.style.overflow;menuPanel.showModal();menuToggle.setAttribute('aria-expanded','true');document.documentElement.style.overflow='hidden';};
  menuPanel.addEventListener('close',()=>{menuToggle.setAttribute('aria-expanded','false');document.documentElement.style.overflow=previousOverflow;});
- root.querySelector('#header-menu-close').onclick=closeHeaderMenu;
+ menuPanel.addEventListener('cancel',e=>e.preventDefault());
  menuPanel.addEventListener('click',e=>{if(e.target!==menuPanel)return;const b=menuPanel.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)closeHeaderMenu();});
  mountSearch(root,records);
  root.querySelector('#b-close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}};
