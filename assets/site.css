@@ -432,14 +432,14 @@ body{padding-block:24px}
 /* Three clipping windows into the same original; no fabricated edge treatment. */
 #ss-blue-silver>.page-paper{filter:none}
 #ss-blue-silver>.page-paper>span{
- background-image:url('./page-paper-original-v10.webp');
+ background-image:url('./page-paper-original-v11.webp');
  background-size:100% auto;background-repeat:no-repeat;
  margin:0;mask:none;-webkit-mask:none;filter:none;opacity:1;
 }
-#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-original-v10.webp');background-position:center top;background-size:100% auto}
+#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-original-v11.webp');background-position:center top;background-size:100% auto}
 #ss-blue-silver>.page-paper>.paper-middle{
- background-image:url('./page-paper-original-v10.webp');
+ background-image:url('./page-paper-original-v11.webp');
  background-position:center calc(-1 * var(--paper-top-cut,200px));
  background-size:100% auto;margin-block:0;mask:none;-webkit-mask:none;
 }
-#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-original-v10.webp');background-position:center bottom;background-size:100% auto}
+#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-original-v11.webp');background-position:center bottom;background-size:100% auto}
