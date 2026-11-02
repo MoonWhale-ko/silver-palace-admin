@@ -136,3 +136,8 @@ html,body{margin:0;min-height:100%;scroll-behavior:smooth}body{background:#e9ebe
 #ss-blue-silver .result-row strong{font-weight:500}
 #ss-blue-silver .result-row small{font-size:12px}
 #ss-blue-silver #search-heading:focus{outline:none}
+
+/* Approved aged paper is limited to the search popup. */
+#ss-blue-silver #search-dialog{height:540px;padding:60px 24px;border:0;border-radius:0;background:transparent url('./search-paper-parchment-960x1080.png') center/100% 100% no-repeat;color:#29343d;--ink:#29343d;--muted:#60604e;--line:#b8ad8d;--accent:#665730;--hover:#b9a46b26}
+#ss-blue-silver[data-theme=dark] #search-dialog{color:#29343d;--ink:#29343d;--muted:#60604e;--line:#b8ad8d;--accent:#665730;--hover:#b9a46b26}
+@media(max-width:640px){#ss-blue-silver #search-dialog{padding:60px 20px}}
