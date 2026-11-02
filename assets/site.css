@@ -168,3 +168,11 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver .masthead-upper .masthead-tip{position:absolute;top:13.5px;width:8px;height:5px;background:var(--ink);clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)}
 #ss-blue-silver .masthead-tip:first-child{left:0}
 #ss-blue-silver .masthead-tip:last-child{right:0}
+
+/* Thin lower rule matching the upper line weight. */
+#ss-blue-silver .masthead-lower{background:linear-gradient(var(--ink),var(--ink)) center/100% 1px no-repeat;mask:none;-webkit-mask:none}
+#ss-blue-silver .masthead-lower::before,#ss-blue-silver .masthead-lower::after{content:'';position:absolute;top:2.5px;width:8px;height:5px;background:var(--ink);clip-path:polygon(0 50%,50% 0,100% 50%,50% 100%)}
+#ss-blue-silver .masthead-lower::before{left:0}
+#ss-blue-silver .masthead-lower::after{right:0}
+/* Raise only the logo and search control, leaving the rules fixed. */
+#ss-blue-silver .site-header .brand,#ss-blue-silver .site-header .search-toggle{transform:translateY(-10px)}
