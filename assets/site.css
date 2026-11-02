@@ -382,3 +382,7 @@ body{padding-block:24px}
 #ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v4-middle.webp')}
 #ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v4-bottom.webp')}
 @media(max-width:640px){body{padding-block:16px}#ss-blue-silver{min-height:calc(100dvh - 32px)}}
+
+/* Keep the keyboard skip link hidden even with space above the sheet. */
+#ss-blue-silver .skip{position:fixed;top:0;transform:translateY(-150%)}
+#ss-blue-silver .skip:focus{transform:none}
