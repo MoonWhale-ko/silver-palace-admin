@@ -357,3 +357,15 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
  -webkit-mask-image:linear-gradient(transparent,#000 6px,#000 calc(100% - 6px),transparent);
 }
 #ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v3-bottom.webp')}
+
+/* Bring the lower rule directly beneath the menu labels. */
+#ss-blue-silver .main-menus{padding-bottom:16px}
+@media(max-width:640px){#ss-blue-silver .main-menus{padding-bottom:16px}}
+/* A softly shaded paper surround connects the sheet to its surroundings. */
+html,body,body:has(#ss-blue-silver[data-theme=dark]){
+ background-color:#d9ccb0;
+ background-image:linear-gradient(#c7b99b80,#c7b99b80),url('./page-paper-v3-middle.webp');
+ background-position:center top;
+ background-size:auto,900px auto;
+ background-repeat:repeat;
+}
