@@ -299,3 +299,21 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 /* Align the drawer with the 900px sheet, including full-width mobile. */
 #ss-blue-silver dialog.header-menu-panel{right:max(0px,calc((100vw - 900px)/2))}
 
+
+/* A single continuous cloth layer avoids mismatched generated cap seams.
+   The top and bottom rules remain independent from the responsive texture. */
+#ss-blue-silver dialog.header-menu-panel,
+#ss-blue-silver[data-theme=dark] dialog.header-menu-panel{
+ background-image:url('./drawer-cover-middle.webp');
+ background-position:left top;
+ background-size:100% 100%;
+ background-repeat:no-repeat;
+ box-shadow:inset 0 3px 4px #020c16aa,inset 0 -3px 4px #020c16aa;
+}
+#ss-blue-silver dialog.header-menu-panel::before,
+#ss-blue-silver dialog.header-menu-panel::after{
+ content:'';position:absolute;right:0;pointer-events:none;
+ border-top:1px solid #c7a95f;border-bottom:1px solid #c7a95f;
+}
+#ss-blue-silver dialog.header-menu-panel::before{left:7.65%;top:8px;bottom:8px}
+#ss-blue-silver dialog.header-menu-panel::after{left:8.3%;top:11px;bottom:11px;border-color:#9c824c}
