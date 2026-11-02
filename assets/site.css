@@ -373,3 +373,12 @@ html,body,body:has(#ss-blue-silver[data-theme=dark]){
 /* Reserve the viewport scrollbar space while modal drawers lock scrolling. */
 html{scrollbar-gutter:stable}
 #ss-blue-silver dialog.header-menu-panel{right:max(0px,calc((100% - 900px)/2))}
+
+/* Navy surround with breathing room above and below the intact paper sheet. */
+html,body,body:has(#ss-blue-silver[data-theme=dark]){background:#152538}
+body{padding-block:24px}
+#ss-blue-silver{min-height:calc(100dvh - 48px)}
+#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v4-top.webp')}
+#ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v4-middle.webp')}
+#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v4-bottom.webp')}
+@media(max-width:640px){body{padding-block:16px}#ss-blue-silver{min-height:calc(100dvh - 32px)}}
