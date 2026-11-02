@@ -194,7 +194,7 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver .hero.hero-welcome{min-height:0;height:auto;aspect-ratio:1280/647;isolation:isolate;overflow:hidden;background:#192731}
 #ss-blue-silver .hero-welcome .hero-image{position:absolute;inset:0 auto auto 0;width:100%;height:auto;max-width:none;object-fit:initial;object-position:initial;z-index:0}
 #ss-blue-silver .hero-welcome .welcome-link{position:absolute;left:26px;bottom:23px;z-index:1;color:#fff;font:400 27px/1.5 MapoGoldenPier,serif;text-decoration:none;text-shadow:0 1px 5px #000b,0 0 16px #0009;padding:4px 0}
-#ss-blue-silver .hero-welcome .welcome-link:hover{text-decoration:underline;text-underline-offset:6px}
+#ss-blue-silver .hero-welcome .welcome-link:hover{text-decoration:none}
 @media(max-width:640px){#ss-blue-silver .hero-welcome .welcome-link{left:16px;bottom:12px;font-size:20px}}
 
 /* Scale the two-line welcome caption with the artwork itself. */
@@ -203,3 +203,17 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 
 /* Shift welcome caption 10px right and 30px up. */
 #ss-blue-silver .hero-welcome .welcome-link{left:20px;bottom:calc(24% + 30px)}
+
+/* Six navigation entries with theme-aware game icon silhouettes. */
+#ss-blue-silver .main-menus{grid-template-columns:repeat(6,minmax(0,1fr))}
+#ss-blue-silver .main-menus .menu{align-items:center;justify-content:center;gap:10px;padding:12px 6px;min-height:110px;text-align:center}
+#ss-blue-silver .menu-icon{display:block;width:44px;height:44px;flex:none;background:var(--ink);mask-image:var(--menu-icon);-webkit-mask-image:var(--menu-icon);mask-size:contain;-webkit-mask-size:contain;mask-repeat:no-repeat;-webkit-mask-repeat:no-repeat;mask-position:center;-webkit-mask-position:center}
+#ss-blue-silver .main-menus .menu-title{font-size:17px;white-space:nowrap}
+@media(max-width:640px){#ss-blue-silver .main-menus{grid-template-columns:repeat(3,minmax(0,1fr))}#ss-blue-silver .main-menus .menu,#ss-blue-silver .main-menus .menu:last-child{grid-column:auto;display:flex;padding:14px 5px;min-height:106px;border:0;border-bottom:1px solid var(--line)}#ss-blue-silver .main-menus .menu:not(:nth-child(3n+1)){border-left:1px solid var(--line)}#ss-blue-silver .main-menus .menu:nth-last-child(-n+3){border-bottom:0}#ss-blue-silver .main-menus .menu-title{font-size:16px}}
+
+/* Default section divider follows the lower masthead rule. */
+#ss-blue-silver .main-menus,#ss-blue-silver .site-note,#ss-blue-silver .guide-row{position:relative;border-top:0;border-bottom:0}
+#ss-blue-silver .main-menus::after,#ss-blue-silver .site-note::before,#ss-blue-silver .site-note::after,#ss-blue-silver .guide-row::after,#ss-blue-silver .guide-list::before{content:'';position:absolute;left:0;right:0;height:5px;pointer-events:none;background:linear-gradient(var(--ink),var(--ink)) center/100% 1.5px no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath fill='%2329343d' d='M0 2.5 4 0 8 2.5 4 5Z'/%3E%3C/svg%3E") left center/8px 5px no-repeat,url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5'%3E%3Cpath fill='%2329343d' d='M0 2.5 4 0 8 2.5 4 5Z'/%3E%3C/svg%3E") right center/8px 5px no-repeat;mask:none}
+#ss-blue-silver .main-menus::after,#ss-blue-silver .site-note::after,#ss-blue-silver .guide-row::after{bottom:-2px}
+#ss-blue-silver .site-note::before,#ss-blue-silver .guide-list::before{top:-2px}
+#ss-blue-silver .guide-list{position:relative}

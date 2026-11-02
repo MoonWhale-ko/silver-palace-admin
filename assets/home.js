@@ -2,7 +2,7 @@ export function validate(data) {
   const keys=['heading','description','beginnerTitle','beginnerDescription','updateText','updateDate'];
   if(!data || keys.some(k=>typeof data[k]!=='string'||data[k].length>500)) throw Error('문구는 500자 이하로 입력하세요.');
   if(!/^\d{4}-\d{2}-\d{2}$/.test(data.updateDate)||Number.isNaN(Date.parse(data.updateDate))) throw Error('날짜를 확인하세요.');
-  if(!Array.isArray(data.menus)||data.menus.length!==5) throw Error('메뉴는 5개여야 합니다.');
+  if(!Array.isArray(data.menus)||data.menus.length!==6) throw Error('메뉴는 6개여야 합니다.');
   data.menus.forEach(m=>{
     if(!m||typeof m.title!=='string'||!m.title.trim()||m.title.length>60||typeof m.description!=='string'||m.description.length>200||typeof m.url!=='string') throw Error('메뉴 입력을 확인하세요.');
     if(m.url && !(m.url.startsWith('/')&&!m.url.startsWith('//')&&!m.url.includes('\\')) && !/^https:\/\//.test(m.url)) throw Error('링크는 /로 시작하는 내부 경로나 https 주소를 사용하세요.');
