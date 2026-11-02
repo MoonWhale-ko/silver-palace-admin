@@ -242,3 +242,6 @@ body:has(#ss-blue-silver[data-theme=dark]){background:#11161b}
 #ss-blue-silver .main-menus .menu{min-width:0;min-height:140px;padding:14px 3px}
 #ss-blue-silver .menu-icon{width:min(88px,100%);height:auto;aspect-ratio:1}
 @media(max-width:640px){#ss-blue-silver .main-menus .menu,#ss-blue-silver .main-menus .menu:last-child{min-height:90px;padding:12px 2px}#ss-blue-silver .main-menus .menu-title{font-size:clamp(9px,2.3vw,14px);letter-spacing:-.06em}}
+
+/* Reduce navigation icons by 25 percent. */
+#ss-blue-silver .menu-icon{width:min(66px,75%)}
