@@ -35,4 +35,21 @@ export function mount(data){
  menuPanel.addEventListener('click',e=>{if(e.target!==menuPanel)return;const b=menuPanel.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)closeHeaderMenu();});
  mountSearch(root,records);
  root.querySelector('#b-close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog){const b=dialog.getBoundingClientRect();if(e.clientX<b.left||e.clientX>b.right||e.clientY<b.top||e.clientY>b.bottom)dialog.close();}};
+ // Keep the paper section joins on the printed dividers as the layout resizes.
+ const lowerMasthead=root.querySelector('.masthead-lower');
+ let paperFrame=0;
+ function alignPaperCuts(){
+  paperFrame=0;
+  const sheet=root.getBoundingClientRect(),upper=lowerMasthead.getBoundingClientRect(),menu=menus.getBoundingClientRect();
+  const rule=getComputedStyle(menus,'::after');
+  const lowerCenter=menu.bottom-(parseFloat(rule.bottom)||0)-(parseFloat(rule.height)||5)/2;
+  root.style.setProperty('--paper-top-cut',Math.max(0,upper.top+upper.height/2-sheet.top)+'px');
+  root.style.setProperty('--paper-bottom-cut',Math.max(0,sheet.bottom-lowerCenter)+'px');
+ }
+ function queuePaperCuts(){if(!paperFrame)paperFrame=requestAnimationFrame(alignPaperCuts);}
+ const paperObserver=new ResizeObserver(queuePaperCuts);
+ [root,root.querySelector('.site-header'),menus].forEach(element=>paperObserver.observe(element));
+ document.fonts.ready.then(queuePaperCuts);
+ queuePaperCuts();
+
 }

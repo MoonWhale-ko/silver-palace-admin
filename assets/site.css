@@ -419,3 +419,12 @@ body{padding-block:24px}
 #ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v8-top.webp')}
 #ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v8-middle.webp')}
 #ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v8-bottom.webp')}
+
+/* Place the paper joins beneath the actual divider centers, without alpha fades. */
+#ss-blue-silver>.page-paper{
+ grid-template-rows:var(--paper-top-cut,200px) minmax(0,1fr) var(--paper-bottom-cut,110px);
+ filter:url('#paper-solid-alpha');
+}
+#ss-blue-silver>.page-paper>.paper-middle{
+ margin-block:0;mask-image:none;-webkit-mask-image:none;
+}
