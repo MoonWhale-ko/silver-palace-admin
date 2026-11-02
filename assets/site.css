@@ -396,3 +396,10 @@ body{padding-block:24px}
 #ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v5-middle.webp')}
 #ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v5-bottom.webp')}
 @media(max-width:640px){#ss-blue-silver{min-height:max(1800px,calc(100dvh - 32px))}}
+
+/* Long unique source, sliced into three parts; page height follows its contents. */
+#ss-blue-silver{display:flow-root;min-height:calc(100dvh - 48px)}
+#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v6-top.webp')}
+#ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v6-middle.webp');background-repeat:no-repeat}
+#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v6-bottom.webp')}
+@media(max-width:640px){#ss-blue-silver{min-height:calc(100dvh - 32px)}}
