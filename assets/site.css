@@ -403,3 +403,12 @@ body{padding-block:24px}
 #ss-blue-silver>.page-paper>.paper-middle{background-image:url('./page-paper-v6-middle.webp');background-repeat:no-repeat}
 #ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v6-bottom.webp')}
 @media(max-width:640px){#ss-blue-silver{min-height:calc(100dvh - 32px)}}
+
+/* Crop the long center at its natural aspect ratio instead of compressing it. */
+#ss-blue-silver>.page-paper>.paper-top{background-image:url('./page-paper-v7-top.webp')}
+#ss-blue-silver>.page-paper>.paper-middle{
+ background-image:url('./page-paper-v7-middle.webp');background-size:100% auto;background-position:center top;
+ margin-block:-12px;mask-image:linear-gradient(transparent,#000 12px,#000 calc(100% - 12px),transparent);
+ -webkit-mask-image:linear-gradient(transparent,#000 12px,#000 calc(100% - 12px),transparent);
+}
+#ss-blue-silver>.page-paper>.paper-bottom{background-image:url('./page-paper-v7-bottom.webp')}
