@@ -32,10 +32,10 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .source-note{font-size:12px;color:#68665e;margin:20px 0}
  
  #ss-blue-silver .folder-inside{top:10%;left:0;right:0;height:88%;justify-content:flex-start;gap:0;opacity:1;overflow:hidden}
- #ss-blue-silver .folder-portrait{width:75%;height:auto;flex-shrink:0;background:transparent;border:0;overflow:visible}
+ #ss-blue-silver .folder-portrait{width:66.6667%;height:auto;flex-shrink:0;background:transparent;border:0;overflow:visible}
  #ss-blue-silver .folder-portrait img{width:100%;height:auto;object-fit:contain}
  #ss-blue-silver .folder-copy{display:none}
- @media(max-width:540px){#ss-blue-silver .folder-inside{top:10%;gap:0}#ss-blue-silver .folder-portrait{width:75%;height:auto}}
+ @media(max-width:540px){#ss-blue-silver .folder-inside{top:10%;gap:0}#ss-blue-silver .folder-portrait{width:66.6667%;height:auto}}
 `;document.head.append(style);}
  host.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='목록 디자인 시안';body.replaceChildren();
  const note=document.createElement('p');note.className='catalog-note';note.textContent='폴더에 마우스를 올리거나 눌러보세요. 폴더에 표지 일러스트와 속성별 색상을 적용했습니다.';
