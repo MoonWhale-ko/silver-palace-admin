@@ -485,3 +485,10 @@ body{padding-block:24px}
 #ss-blue-silver #search-dialog::after{content:none}
 #ss-blue-silver #search-dialog .popup-search{background:#f5f3edb3;border-bottom:1px solid var(--ink)}
 @media(max-width:640px){#ss-blue-silver #search-dialog{padding:28px 20px 24px}}
+
+/* Newspaper scrap silhouette is in the original asset, with no printed content. */
+#ss-blue-silver #search-dialog,
+#ss-blue-silver[data-theme=dark] #search-dialog{
+ background:transparent url('./search-newsprint-serrated-v3.webp') center/100% 100% no-repeat;
+ box-shadow:none;border:0;border-radius:0;
+}
