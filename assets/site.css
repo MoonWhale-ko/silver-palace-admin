@@ -496,3 +496,7 @@ body{padding-block:24px}
 /* Actual printed newspaper clipping with clean scissor-cut edges. */
 #ss-blue-silver #search-dialog,
 #ss-blue-silver[data-theme=dark] #search-dialog{background:transparent url('./search-newspaper-cut-v4.webp') center/100% 100% no-repeat}
+
+/* Blank newsprint: original fine side serrations and scissor-cut ends. */
+#ss-blue-silver #search-dialog,
+#ss-blue-silver[data-theme=dark] #search-dialog{background:transparent url('./search-blank-newsprint-v5.webp') center/100% 100% no-repeat}
