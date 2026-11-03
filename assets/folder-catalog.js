@@ -28,7 +28,17 @@ export function openCharacterCatalog(root){
  #ss-blue-silver .catalog-status{font-size:12px;min-height:24px;margin:18px 0 0;color:#68665e}
  @media(max-width:540px){#ss-blue-silver .catalog-dialog{padding:20px 16px}#ss-blue-silver .folder-stack{padding-right:0}#ss-blue-silver .folder-tab{width:145px;font-size:14px}#ss-blue-silver .folder-label{left:160px;font-size:10px;letter-spacing:0}#ss-blue-silver .folder-inside{inset:58px 16px 36%;gap:10px}#ss-blue-silver .folder-portrait{width:86px;height:118px}#ss-blue-silver .folder-portrait:before{left:20px;top:12px}#ss-blue-silver .folder-portrait:after{left:-8px;top:67px}#ss-blue-silver .folder-copy strong{font-size:19px}#ss-blue-silver .folder-item:hover,#ss-blue-silver .folder-item:focus-visible,#ss-blue-silver .folder-item[data-expanded=true]{margin-bottom:calc(-100% / 0.707 / 3)}}
  @media(prefers-reduced-motion:reduce){#ss-blue-silver .folder-item,#ss-blue-silver .folder-inside{transition:none}}
- `;document.head.append(style);}
+ 
+ /* Expand the actual row so following folders move down, without overlapping hit areas. */
+ #ss-blue-silver .folder-stack{container-type:inline-size}
+ #ss-blue-silver .folder-item{--folder-height:calc(100cqw / 0.707);height:73px;aspect-ratio:auto;margin:0!important;overflow:hidden;transition:height .32s ease}
+ #ss-blue-silver .folder-item:before{inset:20px 0 auto;height:calc(var(--folder-height) - 20px)}
+ #ss-blue-silver .folder-item:after{inset:40px 12px auto;height:calc(var(--folder-height) - 52px)}
+ #ss-blue-silver .folder-inside{inset:68px 22px auto;height:calc(var(--folder-height) * 0.64 - 68px)}
+ #ss-blue-silver .folder-item:hover,#ss-blue-silver .folder-item:focus-visible,#ss-blue-silver .folder-item[data-expanded=true]{height:calc(var(--folder-height) * 2 / 3);margin:0!important;transform:none}
+ @media(max-width:540px){#ss-blue-silver .folder-inside{inset:58px 16px auto;height:calc(var(--folder-height) * 0.64 - 58px)}}
+ @media(prefers-reduced-motion:reduce){#ss-blue-silver .folder-item{transition:none}}
+`;document.head.append(style);}
  dialog.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='목록 디자인 시안';
  body.replaceChildren();const note=document.createElement('p');note.className='catalog-note';note.textContent='폴더에 마우스를 올리거나 눌러보세요. 이름과 초상화는 임시 표시입니다.';
  const stack=document.createElement('div');stack.className='folder-stack';stack.setAttribute('aria-label','캐릭터 폴더 목록');
