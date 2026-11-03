@@ -514,3 +514,7 @@ body{padding-block:24px}
 
 /* Let the result area absorb the heading height inside the fixed popup. */
 #ss-blue-silver #search-dialog #search-options{flex:1 1 0;min-height:0;overflow:auto}
+
+/* Persistent guide caption below the welcome title. */
+#ss-blue-silver .hero-welcome .welcome-link{width:max-content}
+#ss-blue-silver .hero-welcome .welcome-guide-caption{position:absolute;top:100%;left:0;display:block;margin-top:.55em;white-space:nowrap;font:italic 400 .36em/1.5 MapoGoldenPier,serif;letter-spacing:0;color:inherit}
