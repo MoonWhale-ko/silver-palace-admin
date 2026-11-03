@@ -511,3 +511,6 @@ body{padding-block:24px}
 #ss-blue-silver #search-dialog #search-history-footer{border-top:0}
 #ss-blue-silver #search-dialog #history-clear{font-size:11px}
 @media(max-width:640px){#ss-blue-silver #search-dialog{padding:28px 20px 24px}}
+
+/* Let the result area absorb the heading height inside the fixed popup. */
+#ss-blue-silver #search-dialog #search-options{flex:1 1 0;min-height:0;overflow:auto}
