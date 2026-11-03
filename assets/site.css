@@ -461,3 +461,15 @@ body{padding-block:24px}
 /* Adjust the two header controls independently, preserving their vertical offset. */
 #ss-blue-silver .site-header .search-toggle{transform:translate(-15px,-10px)}
 #ss-blue-silver .site-header .header-menu-toggle{transform:translate(-5px,-10px)}
+
+/* Printed contents-style guide entry. */
+#ss-blue-silver .term-guide>button{color:#263c4d;padding:18px 16px;transition:background-color .18s ease}
+#ss-blue-silver .term-guide-label{display:flex;align-items:center;gap:18px}
+#ss-blue-silver .term-guide-book{display:block;flex:none}
+#ss-blue-silver .term-guide-arrow{display:block;flex:none;transition:transform .18s ease}
+#ss-blue-silver .term-guide>button:hover,
+#ss-blue-silver .term-guide>button:focus-visible{background:#263c4d0d}
+#ss-blue-silver .term-guide>button:hover .term-guide-arrow,
+#ss-blue-silver .term-guide>button:focus-visible .term-guide-arrow{transform:translateX(4px)}
+@media(max-width:640px){#ss-blue-silver .term-guide>button{padding:16px 10px}#ss-blue-silver .term-guide-label{gap:14px}}
+@media(prefers-reduced-motion:reduce){#ss-blue-silver .term-guide>button,#ss-blue-silver .term-guide-arrow{transition:none}}
