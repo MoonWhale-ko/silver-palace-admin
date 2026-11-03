@@ -148,13 +148,13 @@ export async function openCharacterCatalog(root){
  stage.dataset.open='false';
  stage.querySelectorAll('img').forEach(img=>{img.loading='eager';});
  await Promise.all([...stage.querySelectorAll('img')].map(img=>img.decode().catch(()=>{})));
- const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ const openingStarted=performance.now();
  const box=stage.getBoundingClientRect(),front=stage.querySelector('.dossier-front');
- const travel=stage.animate([{transform:'translate('+(start.left-box.left)+'px,'+(start.top-box.top)+'px) scale('+(start.width/width)+')'},{transform:'translate(-22%,0) scale(.94)',offset:.22},{transform:'translate(0,0) scale(1)'}],{duration:reduced?0:4800,easing:'cubic-bezier(.3,.1,.3,1)',fill:'forwards'});
- const hinge=front.animate([{transform:'rotateY(0deg)'},{transform:'rotateY(-12deg)',offset:.18},{transform:'rotateY(-165deg)'}],{duration:reduced?0:4800,easing:'cubic-bezier(.35,.05,.3,1)',fill:'forwards'});
+ const travel=stage.animate([{transform:'translate('+(start.left-box.left)+'px,'+(start.top-box.top)+'px) scale('+(start.width/width)+')'},{transform:'translate(-22%,0) scale(.94)',offset:.22},{transform:'translate(0,0) scale(1)'}],{duration:4800,easing:'cubic-bezier(.3,.1,.3,1)',fill:'forwards'});
+ const hinge=front.animate([{transform:'rotateY(0deg)'},{transform:'rotateY(-12deg)',offset:.18},{transform:'rotateY(-165deg)'}],{duration:4800,easing:'cubic-bezier(.35,.05,.3,1)',fill:'forwards'});
  status.textContent=character.name+' · 서류철을 펼치는 중';
  await Promise.all([travel.finished,hinge.finished]);
- if(!reduced)await new Promise(resolve=>setTimeout(resolve,650));
+ await new Promise(resolve=>setTimeout(resolve,Math.max(650,5450-(performance.now()-openingStarted))));
  const target=new URL(location.href);target.searchParams.set('character',character.id);location.assign(target.href);
  }
  const selectedId=new URL(location.href).searchParams.get('character'),selected=records.find(c=>c.id===selectedId);
