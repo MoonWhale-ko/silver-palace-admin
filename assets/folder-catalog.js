@@ -27,7 +27,7 @@ export function openCharacterCatalog(root){
  const note=document.createElement('p');note.className='catalog-note';note.textContent='폴더에 마우스를 올리거나 눌러보세요. 이름·사진·색상은 임시 표시입니다.';
  const stack=document.createElement('div');stack.className='folder-stack';stack.setAttribute('aria-label','캐릭터 폴더 목록');
  const status=document.createElement('p');status.className='catalog-status';status.setAttribute('role','status');status.textContent='상세 페이지는 아직 연결되지 않았습니다.';
- const shifts=[-12,15,-7,19,-16,5,13,-10,7,-18,16,-4,11,-13],tilts=[-3.2,2.6,-1.8,3.8,-2.7,1.5,-2.2,3.1,-1.4,2.4,-3.5,1.1,3.4,-2.1];let pinned=null;
+ const shifts=[-8,-3,14,6,18,-12,-7,-16,4,11,7,-5,15,-2],tilts=[-.4,-1.1,.3,.8,3.6,-.2,-.7,-2.1,.1,.6,.4,-3.3,1.2,-.5];let pinned=null;
  function activate(row){
  const rows=[...stack.querySelectorAll('.folder-row')];if(rows.every(r=>(r.dataset.open==='true')===(r===row)))return;
  const before=rows.map(r=>r.getBoundingClientRect().top);
