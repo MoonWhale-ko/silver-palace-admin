@@ -154,7 +154,7 @@ export async function openCharacterCatalog(root){
  const x0=start.left-box.left,y0=start.top-box.top,s0=start.width/width;
  status.textContent=character.name+' · 서류철을 펼치는 중';
  await new Promise(resolve=>{
- let started=null;const duration=4800,ease=t=>t*t*(3-2*t);
+ let started=null;const duration=2400,ease=t=>t*t*(3-2*t);
  function draw(now){if(started===null)started=now;const t=Math.min(1,(now-started)/duration),p=ease(t),turn=ease(Math.max(0,(t-.12)/.88));
  stage.style.setProperty('transform','translate('+(x0*(1-p))+'px,'+(y0*(1-p))+'px) scale('+(s0+(1-s0)*p)+')','important');
  front.style.setProperty('transform','rotateY('+(-165*turn)+'deg)','important');
