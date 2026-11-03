@@ -518,3 +518,7 @@ body{padding-block:24px}
 /* Persistent guide caption below the welcome title. */
 #ss-blue-silver .hero-welcome .welcome-link{width:max-content}
 #ss-blue-silver .hero-welcome .welcome-guide-caption{position:absolute;top:100%;left:0;display:block;margin-top:.55em;white-space:nowrap;font:italic 400 .36em/1.5 MapoGoldenPier,serif;letter-spacing:0;color:inherit}
+
+/* Fit all six 42px history rows within the newspaper popup. */
+#ss-blue-silver #search-dialog .search-paper-title{margin-bottom:12px}
+#ss-blue-silver #search-dialog .search-list-heading{margin-top:12px}
