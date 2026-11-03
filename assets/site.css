@@ -500,3 +500,14 @@ body{padding-block:24px}
 /* Blank newsprint: original fine side serrations and scissor-cut ends. */
 #ss-blue-silver #search-dialog,
 #ss-blue-silver[data-theme=dark] #search-dialog{background:transparent url('./search-blank-newsprint-v5.webp') center/100% 100% no-repeat}
+
+/* Newspaper-style search typography, without tape or added shadows. */
+#ss-blue-silver #search-dialog{padding:30px 24px 28px}
+#ss-blue-silver #search-dialog .search-paper-title{flex-shrink:0;margin:0 0 18px;padding:0 0 12px;border-bottom:3px double var(--ink);font:400 23px/1.4 MapoGoldenPier,serif;letter-spacing:.06em;color:var(--ink)}
+#ss-blue-silver #search-dialog .popup-search{flex-shrink:0;background:transparent;border:1px solid var(--ink);border-radius:0}
+#ss-blue-silver #search-dialog .popup-search input{background:transparent}
+#ss-blue-silver #search-dialog .search-list-heading{font-size:12px;color:var(--ink);letter-spacing:.04em}
+#ss-blue-silver #search-dialog .search-history-rule{border-top-color:var(--ink);opacity:.55}
+#ss-blue-silver #search-dialog #search-history-footer{border-top:0}
+#ss-blue-silver #search-dialog #history-clear{font-size:11px}
+@media(max-width:640px){#ss-blue-silver #search-dialog{padding:28px 20px 24px}}
