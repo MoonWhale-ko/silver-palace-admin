@@ -14,5 +14,5 @@ await writeFile('dist/assets/home.js',(await readFile('assets/home.js','utf8')).
 await writeFile('dist/index.html',(await readFile('index.html','utf8')).replace('src="site.html"','src="site.html?v='+hash+'"').replace('src="editor/editor.js"','src="editor/editor.js?v='+hash+'"'));
 console.log('사이트 dist 빌드 완료 · '+hash);
 
-await writeFile('dist/assets/site-runtime.js',(await readFile('assets/site-runtime.js','utf8')).replace("'./search-popup.js'", "'./search-popup.js?v="+hash+"'"));
+await writeFile('dist/assets/site-runtime.js',(await readFile('assets/site-runtime.js','utf8')).replace("'./search-popup.js'", "'./search-popup.js?v="+hash+"'").replace("'./folder-catalog.js'", "'./folder-catalog.js?v="+hash+"'"));
 await writeFile('dist/assets/search-popup.js',(await readFile('assets/search-popup.js','utf8')).replace("'./search-model.js'", "'./search-model.js?v="+hash+"'"));
