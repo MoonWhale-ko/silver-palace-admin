@@ -55,3 +55,5 @@ export function mount(data){
  queuePaperCuts();
 
 }
+
+// Refresh folder preview module after adding versioned imports.
