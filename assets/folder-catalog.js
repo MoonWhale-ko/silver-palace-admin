@@ -53,8 +53,8 @@ export async function openCharacterCatalog(root){
 
  #ss-blue-silver .folder-portrait{aspect-ratio:1;height:auto}
 
- #ss-blue-silver .portrait-mount{position:absolute;top:52%;left:25%;width:50%;height:50%;display:block;padding:0;background:none;border:0;box-shadow:none}
- #ss-blue-silver .portrait-mount>img{width:100%;height:100%;object-fit:cover;display:block;outline:0;background:transparent}
+ #ss-blue-silver .portrait-mount{position:absolute;top:60%;left:25%;width:50%;height:50%;display:block;padding:0;background:none;border:0;box-shadow:none}
+ #ss-blue-silver .portrait-mount>img{width:100%;height:100%;object-fit:cover;display:block;outline:0;background:#eee4ce url('${new URL('./page-paper-original-v11.webp',import.meta.url).href}') center/200% auto no-repeat}
 
  #ss-blue-silver .folder-window-paper{position:absolute;left:21%;top:15.8%;width:58%;height:16.5%;border-radius:14px;background:#eee4ce url('${new URL('./page-paper-original-v11.webp',import.meta.url).href}') center/200% auto no-repeat;z-index:0}
  #ss-blue-silver .folder-shape{z-index:1}
