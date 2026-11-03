@@ -64,20 +64,37 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .folder-stack .folder-item{cursor:grab}
  #ss-blue-silver .folder-stack.is-dragging,#ss-blue-silver .folder-stack.is-dragging .folder-item{cursor:grabbing}
  #ss-blue-silver .dossier-back{display:inline-block;margin:12px 0 22px;color:inherit}
- #ss-blue-silver .dossier-stage{position:relative;width:min(340px,42vw);aspect-ratio:.707;margin:26px 0 36px 50%;perspective:1500px;isolation:isolate;transform:translateX(-50%);transition:transform 1.8s cubic-bezier(.3,.1,.25,1);--full:100%}
+ #ss-blue-silver .dossier-stage{position:relative;width:min(340px,42vw);aspect-ratio:.707;margin:26px 0 36px 50%;perspective:1500px;isolation:isolate;transform:translateX(-50%);transition:transform 4.2s cubic-bezier(.35,.05,.3,1);--full:100%}
  #ss-blue-silver .dossier-stage[data-open=true]{transform:translateX(0)}
  #ss-blue-silver .dossier-resume{position:absolute;inset:2% 4% 1%;padding:12% 10%;box-sizing:border-box;background:#eee4ce url('${new URL('./page-paper-original-v11.webp',import.meta.url).href}') center/200% auto;color:#303a42;border:1px solid #b9ad96;box-shadow:2px 4px 9px #26333e30;font-family:'Noto Serif KR',serif}
  #ss-blue-silver .dossier-resume h2{font-size:clamp(17px,2.8vw,27px);text-align:center;border-bottom:3px double #817d72;padding-bottom:12px;margin:0 0 24px}
  #ss-blue-silver .dossier-resume h3{font-size:clamp(16px,2.3vw,23px);margin:0 0 16px}
  #ss-blue-silver .dossier-resume p{font-size:clamp(11px,1.7vw,15px)}
  #ss-blue-silver .resume-pending{margin-top:35px;color:#6b695f}
- #ss-blue-silver .dossier-stage .dossier-front{height:100%;width:100%;transform:rotateY(0);transform-origin:3.333% 50%;transform-style:preserve-3d;transition:transform 1.8s cubic-bezier(.3,.1,.25,1);cursor:default;pointer-events:none;z-index:2}
+ #ss-blue-silver .dossier-stage .dossier-front{height:100%;width:100%;transform:rotateY(0);transform-origin:3.333% 50%;transform-style:preserve-3d;transition:transform 4.2s cubic-bezier(.35,.05,.3,1);cursor:default;pointer-events:none;z-index:2}
  #ss-blue-silver .dossier-stage[data-open=true] .dossier-front{transform:rotateY(-165deg)}
  #ss-blue-silver .dossier-front>*{backface-visibility:hidden}
  #ss-blue-silver .dossier-reverse{position:absolute;inset:1.6% 3.333% .8%;background:var(--folder-fill);transform:rotateY(180deg) translateZ(1px);border:1px solid var(--folder-edge);z-index:10;box-shadow:inset -5px 0 8px #26333e18}
  #ss-blue-silver .dossier-front .folder-tab{left:6.667%;top:1.96%;font-size:clamp(10px,1.6vw,16px)}
  #ss-blue-silver .dossier-replay{display:block;margin:16px auto;padding:9px 18px;font:inherit;color:#354149;border:1px solid #a99f8a;background:#f3eddf;cursor:pointer}
  @media(prefers-reduced-motion:reduce){#ss-blue-silver .dossier-stage,#ss-blue-silver .dossier-stage .dossier-front{transition:none}}
+ #ss-blue-silver .dossier-stage{width:min(380px,42vw)}
+ #ss-blue-silver .dossier-rear{position:absolute;inset:5.9% 3.333% .8%;background:var(--folder-fill);border:1px solid var(--folder-edge);box-shadow:2px 5px 9px #26333e35;z-index:0}
+ #ss-blue-silver .dossier-rear:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#26333e18,transparent 6%,transparent 95%,#fff1);pointer-events:none}
+ #ss-blue-silver .dossier-sheets{position:absolute;inset:0;z-index:1}
+ #ss-blue-silver .dossier-sheet{position:absolute;inset:9% 8% 5%;background:#e9dfc8 url('${new URL('./page-paper-original-v11.webp',import.meta.url).href}') center/200% auto;border:1px solid #bdb29b;box-shadow:0 1px 3px #26333e26;padding:12% 10%}
+ #ss-blue-silver .dossier-sheet.sheet-0{transform:translate(1.5%,1%) rotate(1.3deg)}
+ #ss-blue-silver .dossier-sheet.sheet-1{inset:10% 9% 6%;transform:translate(-1.2%,-.5%) rotate(-1.5deg)}
+ #ss-blue-silver .dossier-sheet.sheet-2{inset:8% 9% 5.5%;transform:translate(.5%,0) rotate(.6deg)}
+ #ss-blue-silver .dossier-sheet i{display:block;height:1px;background:#857f7040;margin:18% 0}
+ #ss-blue-silver .dossier-resume{inset:8% 10% 7%;padding:10% 7%;z-index:2;box-shadow:0 2px 4px #26333e30}
+ #ss-blue-silver .dossier-stage .dossier-front{z-index:3}
+ #ss-blue-silver .dossier-reverse{inset:0;background:none;border:0;box-shadow:none}
+ #ss-blue-silver .dossier-reverse svg{width:100%;height:100%;fill:var(--folder-fill);stroke:var(--folder-edge);stroke-width:1;filter:drop-shadow(1px 3px 3px #26333e28)}
+ #ss-blue-silver .resume-fields{display:grid;grid-template-columns:3em 1fr;margin:18px 0;font:inherit;font-size:clamp(10px,1.5vw,14px);border-top:1px solid #a69d8b}
+ #ss-blue-silver .resume-fields dt,#ss-blue-silver .resume-fields dd{margin:0;padding:9px 4px;border-bottom:1px solid #a69d8b}
+ #ss-blue-silver .resume-fields dt{color:#6b695f}
+ #ss-blue-silver .dossier-stage.is-resetting,#ss-blue-silver .dossier-stage.is-resetting .dossier-front{transition:none}
 `;document.head.append(style);}
  if(!document.getElementById('nameplate-ink-defs')){const defs=document.createElementNS('http://www.w3.org/2000/svg','svg');defs.id='nameplate-ink-defs';defs.setAttribute('width','0');defs.setAttribute('height','0');defs.setAttribute('aria-hidden','true');defs.style.position='absolute';defs.innerHTML='<defs><filter id="nameplate-ink" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.16863 0 0 0 0 0.20392 0 0 0 1 0"/></filter></defs>';document.body.append(defs);}
  host.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='목록 디자인 시안';body.replaceChildren();
@@ -112,11 +129,11 @@ export async function openCharacterCatalog(root){
  const stage=document.createElement('div');stage.className='dossier-stage';stage.style.cssText=source.style.cssText;stage.style.removeProperty('z-index');
  const page=document.createElement('article');page.className='dossier-resume';const title=document.createElement('h2');title.textContent='이력서';const person=document.createElement('h3');person.textContent=selected.name;const meta=document.createElement('p');meta.textContent=selected.element+' / '+selected.job;const pending=document.createElement('p');pending.className='resume-pending';pending.textContent='상세 내용 준비 중';page.append(title,person,meta,pending);
  const front=document.createElement('div');front.className='folder-item dossier-front';front.innerHTML=source.querySelector('.folder-item').innerHTML;front.setAttribute('aria-hidden','true');
- const reverse=document.createElement('div');reverse.className='dossier-reverse';front.append(reverse);
+ const reverse=document.createElement('div');reverse.className='dossier-reverse';reverse.innerHTML='<svg viewBox="0 0 360 509" preserveAspectRatio="none" aria-hidden="true"><path d="M12 8 H146 Q151 8 154 13 L162 27 Q164 30 170 30 H348 V505 H12 Z"/></svg>';front.querySelectorAll('.folder-paper').forEach(p=>p.remove());front.append(reverse);const rear=document.createElement('div');rear.className='dossier-rear';rear.setAttribute('aria-hidden','true');const sheets=document.createElement('div');sheets.className='dossier-sheets';sheets.setAttribute('aria-hidden','true');for(let i=0;i<3;i++){const sheet=document.createElement('div');sheet.className='dossier-sheet sheet-'+i;sheet.innerHTML='<i></i><i></i><i></i><i></i>';sheets.append(sheet);}const fields=document.createElement('dl');fields.className='resume-fields';for(const [label,value] of [['이름',selected.name],['속성',selected.element],['직군',selected.job]]){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;fields.append(dt,dd);}meta.replaceWith(fields);
  const replay=document.createElement('button');replay.type='button';replay.className='dossier-replay';replay.textContent='다시 펼치기';
  const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
- function unfold(){stage.dataset.open='false';replay.disabled=true;requestAnimationFrame(()=>requestAnimationFrame(()=>{stage.dataset.open='true';}));setTimeout(()=>{replay.disabled=false;},reduced?0:2100);}
- replay.onclick=unfold;stage.append(page,front);body.replaceChildren(back,stage,replay);root.querySelector('#dialog-title').textContent=selected.name;root.querySelector('#dialog-status').textContent='캐릭터 기록';document.title=selected.name+' · 실버 스트림';unfold();return;
+ function unfold(){stage.classList.add('is-resetting');stage.dataset.open='false';replay.disabled=true;stage.getBoundingClientRect();requestAnimationFrame(()=>requestAnimationFrame(()=>{stage.classList.remove('is-resetting');stage.dataset.open='true';}));setTimeout(()=>{replay.disabled=false;},reduced?0:4600);}
+ replay.onclick=unfold;stage.append(rear,sheets,page,front);body.replaceChildren(back,stage,replay);root.querySelector('#dialog-title').textContent=selected.name;root.querySelector('#dialog-status').textContent='캐릭터 기록';document.title=selected.name+' · 실버 스트림';unfold();return;
  }
  const resize=new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width>0){const ratio=parseFloat(getComputedStyle(stack).getPropertyValue('--folder-ratio'))||.707;stack.style.setProperty('--folder-height',(width/ratio)+'px');}});resize.observe(stack);
  if(host.tagName==='DIALOG'&&!host.open)host.showModal();
