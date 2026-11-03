@@ -1,4 +1,6 @@
-export function openCharacterCatalog(root){
+export async function openCharacterCatalog(root){
+ let records;try{const response=await fetch(new URL('../data/characters.json',import.meta.url),{cache:'no-cache'});if(!response.ok)throw Error();records=(await response.json()).characters;}catch{root.querySelector('#dialog-content').textContent='캐릭터 데이터를 불러오지 못했습니다. 새로고침해주세요.';return;}
+ const collator=new Intl.Collator('ko');const byName=(a,b)=>collator.compare(a.name,b.name)||a.id.localeCompare(b.id);records.sort(byName);
  const host=root.querySelector('#b-dialog'),body=root.querySelector('#dialog-content');
  if(!document.getElementById('folder-catalog-style')){const style=document.createElement('style');style.id='folder-catalog-style';style.textContent=`
  #ss-blue-silver .catalog-page.catalog-dialog{width:100%;max-width:900px;margin:auto;padding:28px 24px;color:#354149}
@@ -22,9 +24,15 @@ export function openCharacterCatalog(root){
  #ss-blue-silver .catalog-status{margin:22px 0 0}
  @media(max-width:540px){#ss-blue-silver .catalog-page.catalog-dialog{padding:24px 30px}#ss-blue-silver .folder-tab{font-size:12px;top:8px;left:20px}#ss-blue-silver .folder-portrait{width:66px;height:84px}#ss-blue-silver .folder-portrait:before{left:15px;top:7px;width:29px;height:34px}#ss-blue-silver .folder-portrait:after{left:-7px;top:45px}#ss-blue-silver .folder-inside{gap:8px}#ss-blue-silver .folder-copy strong{font-size:15px}}
  @media(prefers-reduced-motion:reduce){#ss-blue-silver .folder-row,#ss-blue-silver .folder-item,#ss-blue-silver .folder-inside{transition:none}}
+ 
+ #ss-blue-silver .folder-portrait:has(img):before,#ss-blue-silver .folder-portrait:has(img):after{display:none}
+ #ss-blue-silver .folder-portrait img{width:100%;height:100%;object-fit:contain;display:block}
+ #ss-blue-silver .catalog-sort{display:flex;gap:12px;align-items:center;font-size:13px;margin-top:18px}
+ #ss-blue-silver .catalog-sort select{font:inherit;padding:8px 12px;background:#f5f0e4;color:#354149;border:1px solid #b1a792}
+ #ss-blue-silver .source-note{font-size:12px;color:#68665e;margin:20px 0}
  `;document.head.append(style);}
  host.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='목록 디자인 시안';body.replaceChildren();
- const note=document.createElement('p');note.className='catalog-note';note.textContent='폴더에 마우스를 올리거나 눌러보세요. 이름·사진·색상은 임시 표시입니다.';
+ const note=document.createElement('p');note.className='catalog-note';note.textContent='폴더에 마우스를 올리거나 눌러보세요. 색상과 배치는 조정 중입니다.';
  const stack=document.createElement('div');stack.className='folder-stack';stack.setAttribute('aria-label','캐릭터 폴더 목록');
  const status=document.createElement('p');status.className='catalog-status';status.setAttribute('role','status');status.textContent='상세 페이지는 아직 연결되지 않았습니다.';
  const shifts=[-8,-3,14,6,18,-12,-7,-16,4,11,7,-5,15,-2],tilts=[-.4,-1.1,.3,.8,3.6,-.2,-.7,-2.1,.1,.6,.4,-3.3,1.2,-.5];let pinned=null;
@@ -35,14 +43,17 @@ export function openCharacterCatalog(root){
  const after=rows.map(r=>r.getBoundingClientRect().top),activeIndex=rows.indexOf(row);
  if(!matchMedia('(prefers-reduced-motion:reduce)').matches)rows.forEach((r,i)=>{const dy=before[i]-after[i];if(Math.abs(dy)>.5)r.animate([{transform:'translateY('+dy+'px)'},{transform:'translateY(0)'}],{duration:1800,delay:Math.min(300,Math.max(0,i-activeIndex-1)*55),easing:'linear',fill:'backwards'});});
 }
- for(let i=0;i<14;i++){const name='캐릭터 '+String.fromCharCode(65+i),row=document.createElement('div');row.className='folder-row';row.style.zIndex=String(i+1);row.style.setProperty('--shift',shifts[i]+'px');row.style.setProperty('--tilt',tilts[i]+'deg');
+ for(let i=0;i<records.length;i++){const character=records[i],name=character.name,row=document.createElement('div');row.className='folder-row';row.style.zIndex=String(i+1);row.style.setProperty('--shift',shifts[i%shifts.length]+'px');row.style.setProperty('--tilt',tilts[i%tilts.length]+'deg');
  const folder=document.createElement('button');folder.type='button';folder.className='folder-item';folder.setAttribute('aria-label',name+' 초상화 보기');folder.setAttribute('aria-expanded','false');
  folder.innerHTML='<svg class="folder-shape" viewBox="0 0 360 509" preserveAspectRatio="none" aria-hidden="true"><path d="M12 8 H146 Q151 8 154 13 L162 27 Q164 30 170 30 H348 V505 H12 Z"/></svg><span class="folder-tab">'+name+'</span><span class="folder-inside"><span class="folder-portrait" aria-hidden="true"></span><span class="folder-copy"><strong>'+name+'</strong><span>초상화 준비 중</span></span></span>';
+ row.dataset.characterId=character.id;const photo=document.createElement('img');photo.src=character.portrait;photo.alt=name;photo.loading='lazy';folder.querySelector('.folder-portrait').append(photo);folder.querySelector('.folder-copy span').textContent=character.element+' · '+character.job;
  const paperLayouts=[
  [[8,2.5,-2.4,82]],[[12,11,1.1,91],[-3,16,-1.8,88]],[[5,3.1,-.6,86],[12,15,2.6,90],[7,4.2,-2,83]],[[ -3,13,-1.1,90]],[[6,3.7,-3.1,84],[12,12,.8,90]],[[9,3.1,-1.2,82],[-4,17,2.1,90],[11,11,.4,91]],[[13,14,1.7,90]],[[-2,12,-2.2,89],[9,2.9,.8,83]],[[7,3.3,1.3,84],[12,17,-.7,91]],[[-4,13,-1.5,90],[6,3.8,2.4,85],[12,19,.3,90]],[[12,12,-1.8,91]],[[8,2.7,.9,84],[-3,18,-2.1,90]],[[12,16,1.2,90],[-2,12,-.8,89],[7,3.4,2,82]],[[8,3.2,-1.6,83],[-4,15,-.3,90]]
- ];const sheets=paperLayouts[i];sheets.forEach(([left,top,angle,width],j)=>{const paper=document.createElement('span');paper.className='folder-paper';paper.setAttribute('aria-hidden','true');Object.assign(paper.style,{left:Math.max(8,left)+'%',top:top+'%',width:width+'%',transform:'rotate('+angle+'deg)',background:j%2?'#e8e3d7':'#f5f0e4'});folder.insertBefore(paper,folder.querySelector('svg'));});
+ ];const sheets=paperLayouts[i%paperLayouts.length];sheets.forEach(([left,top,angle,width],j)=>{const paper=document.createElement('span');paper.className='folder-paper';paper.setAttribute('aria-hidden','true');Object.assign(paper.style,{left:Math.max(8,left)+'%',top:top+'%',width:width+'%',transform:'rotate('+angle+'deg)',background:j%2?'#e8e3d7':'#f5f0e4'});folder.insertBefore(paper,folder.querySelector('svg'));});
  folder.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')activate(row)});folder.addEventListener('focus',()=>activate(row));folder.onclick=()=>{pinned=pinned===row?null:row;activate(pinned);status.textContent=pinned?name+' · 초상화 미리보기':'상세 페이지는 아직 연결되지 않았습니다.';};row.append(folder);stack.append(row);}
- stack.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')activate(pinned)});body.append(note,stack,status);
+ stack.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')activate(pinned)});const controls=document.createElement('label');controls.className='catalog-sort';controls.textContent='정렬';const sort=document.createElement('select');sort.setAttribute('aria-label','캐릭터 정렬');for(const [value,label] of [['name','가나다순'],['element','속성순'],['job','직군순']]){const option=document.createElement('option');option.value=value;option.textContent=label;sort.append(option);}controls.append(sort);
+ sort.onchange=()=>{pinned=null;activate(null);const field=sort.value;const ordered=[...records].sort((a,b)=>(field==='name'?0:collator.compare(a[field],b[field]))||byName(a,b));const rows=new Map([...stack.children].map(r=>[r.dataset.characterId,r]));ordered.forEach((c,i)=>{const row=rows.get(c.id);row.getAnimations().forEach(a=>a.cancel());row.style.zIndex=String(i+1);stack.append(row);});status.textContent=records.length+'개 캐릭터 항목 · '+sort.selectedOptions[0].textContent;};
+ const source=document.createElement('p');source.className='source-note';const link=document.createElement('a');link.href='https://sp-cbt2.csxylic.com/ko/characters/';link.target='_blank';link.rel='noopener noreferrer';link.textContent='데이터 출처: 실버 팰리스 Wiki';source.append(link,document.createTextNode(' · CBT2 v0.10.82.1 · 게임 자료 권리: HappyElements / 乐元素'));body.append(note,controls,stack,status,source);
  const resize=new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width>0){const ratio=parseFloat(getComputedStyle(stack).getPropertyValue('--folder-ratio'))||.707;stack.style.setProperty('--folder-height',(width/ratio)+'px');}});resize.observe(stack);
  if(host.tagName==='DIALOG'&&!host.open)host.showModal();
 }
