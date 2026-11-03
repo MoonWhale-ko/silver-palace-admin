@@ -63,6 +63,21 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .portrait-silver-frame{position:absolute;inset:-14%;display:block;background:url('${new URL('./portrait-silver-frame.svg',import.meta.url).href}') center/100% 100% no-repeat;pointer-events:none}
  #ss-blue-silver .folder-stack .folder-item{cursor:grab}
  #ss-blue-silver .folder-stack.is-dragging,#ss-blue-silver .folder-stack.is-dragging .folder-item{cursor:grabbing}
+ #ss-blue-silver .dossier-back{display:inline-block;margin:12px 0 22px;color:inherit}
+ #ss-blue-silver .dossier-stage{position:relative;width:min(340px,42vw);aspect-ratio:.707;margin:26px 0 36px 50%;perspective:1500px;isolation:isolate;transform:translateX(-50%);transition:transform 1.8s cubic-bezier(.3,.1,.25,1);--full:100%}
+ #ss-blue-silver .dossier-stage[data-open=true]{transform:translateX(0)}
+ #ss-blue-silver .dossier-resume{position:absolute;inset:2% 4% 1%;padding:12% 10%;box-sizing:border-box;background:#eee4ce url('${new URL('./page-paper-original-v11.webp',import.meta.url).href}') center/200% auto;color:#303a42;border:1px solid #b9ad96;box-shadow:2px 4px 9px #26333e30;font-family:'Noto Serif KR',serif}
+ #ss-blue-silver .dossier-resume h2{font-size:clamp(17px,2.8vw,27px);text-align:center;border-bottom:3px double #817d72;padding-bottom:12px;margin:0 0 24px}
+ #ss-blue-silver .dossier-resume h3{font-size:clamp(16px,2.3vw,23px);margin:0 0 16px}
+ #ss-blue-silver .dossier-resume p{font-size:clamp(11px,1.7vw,15px)}
+ #ss-blue-silver .resume-pending{margin-top:35px;color:#6b695f}
+ #ss-blue-silver .dossier-stage .dossier-front{height:100%;width:100%;transform:rotateY(0);transform-origin:3.333% 50%;transform-style:preserve-3d;transition:transform 1.8s cubic-bezier(.3,.1,.25,1);cursor:default;pointer-events:none;z-index:2}
+ #ss-blue-silver .dossier-stage[data-open=true] .dossier-front{transform:rotateY(-165deg)}
+ #ss-blue-silver .dossier-front>*{backface-visibility:hidden}
+ #ss-blue-silver .dossier-reverse{position:absolute;inset:1.6% 3.333% .8%;background:var(--folder-fill);transform:rotateY(180deg) translateZ(1px);border:1px solid var(--folder-edge);z-index:10;box-shadow:inset -5px 0 8px #26333e18}
+ #ss-blue-silver .dossier-front .folder-tab{left:6.667%;top:1.96%;font-size:clamp(10px,1.6vw,16px)}
+ #ss-blue-silver .dossier-replay{display:block;margin:16px auto;padding:9px 18px;font:inherit;color:#354149;border:1px solid #a99f8a;background:#f3eddf;cursor:pointer}
+ @media(prefers-reduced-motion:reduce){#ss-blue-silver .dossier-stage,#ss-blue-silver .dossier-stage .dossier-front{transition:none}}
 `;document.head.append(style);}
  if(!document.getElementById('nameplate-ink-defs')){const defs=document.createElementNS('http://www.w3.org/2000/svg','svg');defs.id='nameplate-ink-defs';defs.setAttribute('width','0');defs.setAttribute('height','0');defs.setAttribute('aria-hidden','true');defs.style.position='absolute';defs.innerHTML='<defs><filter id="nameplate-ink" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.16863 0 0 0 0 0.20392 0 0 0 1 0"/></filter></defs>';document.body.append(defs);}
  host.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='목록 디자인 시안';body.replaceChildren();
@@ -84,11 +99,25 @@ export async function openCharacterCatalog(root){
  const paperLayouts=[
  [[8,2.5,-2.4,82]],[[12,11,1.1,91],[-3,16,-1.8,88]],[[5,3.1,-.6,86],[12,15,2.6,90],[7,4.2,-2,83]],[[ -3,13,-1.1,90]],[[6,3.7,-3.1,84],[12,12,.8,90]],[[9,3.1,-1.2,82],[-4,17,2.1,90],[11,11,.4,91]],[[13,14,1.7,90]],[[-2,12,-2.2,89],[9,2.9,.8,83]],[[7,3.3,1.3,84],[12,17,-.7,91]],[[-4,13,-1.5,90],[6,3.8,2.4,85],[12,19,.3,90]],[[12,12,-1.8,91]],[[8,2.7,.9,84],[-3,18,-2.1,90]],[[12,16,1.2,90],[-2,12,-.8,89],[7,3.4,2,82]],[[8,3.2,-1.6,83],[-4,15,-.3,90]]
  ];const sheets=paperLayouts[i%paperLayouts.length];sheets.forEach(([left,top,angle,width],j)=>{const paper=document.createElement('span');paper.className='folder-paper';paper.setAttribute('aria-hidden','true');Object.assign(paper.style,{left:Math.max(8,left)+'%',top:top+'%',width:width+'%',transform:'rotate('+angle+'deg)',background:j%2?'#e8e3d7':'#f5f0e4'});folder.insertBefore(paper,folder.querySelector('svg'));});
- folder.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')activate(row)});folder.addEventListener('focus',()=>activate(row));folder.onclick=()=>{pinned=pinned===row?null:row;activate(pinned);status.textContent=pinned?name+' · 표지 미리보기':'상세 페이지는 아직 연결되지 않았습니다.';};row.append(folder);stack.append(row);}
+ folder.addEventListener('pointerenter',e=>{if(e.pointerType==='mouse')activate(row)});folder.addEventListener('focus',()=>activate(row));folder.onclick=()=>{const target=new URL(location.href);target.searchParams.set('character',character.id);location.assign(target.href);};row.append(folder);stack.append(row);}
  let drag=null,suppressClick=false;stack.style.touchAction='pan-y';stack.addEventListener('pointerdown',e=>{if(e.pointerType!=='mouse'||e.button!==0)return;drag={id:e.pointerId,y:e.clientY,scroll:window.scrollY,moved:false};});stack.addEventListener('pointermove',e=>{if(!drag||e.pointerId!==drag.id)return;const dy=e.clientY-drag.y;if(!drag.moved&&Math.abs(dy)>6){drag.moved=true;stack.setPointerCapture(e.pointerId);stack.classList.add('is-dragging');document.documentElement.style.userSelect='none';}if(drag.moved){e.preventDefault();window.scrollTo({top:drag.scroll-dy,behavior:'instant'});}});function finishDrag(e){if(!drag||e.pointerId!==drag.id)return;const moved=drag.moved;drag=null;stack.classList.remove('is-dragging');document.documentElement.style.removeProperty('user-select');if(stack.hasPointerCapture(e.pointerId))stack.releasePointerCapture(e.pointerId);if(moved){suppressClick=true;setTimeout(()=>{suppressClick=false},0);}}window.addEventListener('pointerup',finishDrag);window.addEventListener('pointercancel',finishDrag);stack.addEventListener('click',e=>{if(suppressClick){e.preventDefault();e.stopImmediatePropagation();}},{capture:true});stack.addEventListener('dragstart',e=>e.preventDefault());
  stack.addEventListener('pointerleave',e=>{if(e.pointerType==='mouse')activate(pinned)});const controls=document.createElement('label');controls.className='catalog-sort';controls.textContent='정렬';const sort=document.createElement('select');sort.setAttribute('aria-label','캐릭터 정렬');for(const [value,label] of [['name','가나다순'],['element','속성순'],['job','직군순']]){const option=document.createElement('option');option.value=value;option.textContent=label;sort.append(option);}controls.append(sort);
  sort.onchange=()=>{pinned=null;activate(null);const field=sort.value;const ordered=[...records].sort((a,b)=>(field==='name'?0:collator.compare(a[field],b[field]))||byName(a,b));const rows=new Map([...stack.children].map(r=>[r.dataset.characterId,r]));ordered.forEach((c,i)=>{const row=rows.get(c.id);row.getAnimations().forEach(a=>a.cancel());row.style.zIndex=String(i+1);stack.append(row);});status.textContent=records.length+'개 캐릭터 항목 · '+sort.selectedOptions[0].textContent;};
  body.append(note,controls,stack,status);
+
+ const selectedId=new URL(location.href).searchParams.get('character'),selected=records.find(c=>c.id===selectedId);
+ if(selected){
+ const source=[...stack.children].find(r=>r.dataset.characterId===selected.id);
+ const back=document.createElement('a');back.href=location.pathname;back.textContent='← 캐릭터 목록';back.className='dossier-back';
+ const stage=document.createElement('div');stage.className='dossier-stage';stage.style.cssText=source.style.cssText;stage.style.removeProperty('z-index');
+ const page=document.createElement('article');page.className='dossier-resume';const title=document.createElement('h2');title.textContent='이력서';const person=document.createElement('h3');person.textContent=selected.name;const meta=document.createElement('p');meta.textContent=selected.element+' / '+selected.job;const pending=document.createElement('p');pending.className='resume-pending';pending.textContent='상세 내용 준비 중';page.append(title,person,meta,pending);
+ const front=document.createElement('div');front.className='folder-item dossier-front';front.innerHTML=source.querySelector('.folder-item').innerHTML;front.setAttribute('aria-hidden','true');
+ const reverse=document.createElement('div');reverse.className='dossier-reverse';front.append(reverse);
+ const replay=document.createElement('button');replay.type='button';replay.className='dossier-replay';replay.textContent='다시 펼치기';
+ const reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ function unfold(){stage.dataset.open='false';replay.disabled=true;requestAnimationFrame(()=>requestAnimationFrame(()=>{stage.dataset.open='true';}));setTimeout(()=>{replay.disabled=false;},reduced?0:2100);}
+ replay.onclick=unfold;stage.append(page,front);body.replaceChildren(back,stage,replay);root.querySelector('#dialog-title').textContent=selected.name;root.querySelector('#dialog-status').textContent='캐릭터 기록';document.title=selected.name+' · 실버 스트림';unfold();return;
+ }
  const resize=new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(width>0){const ratio=parseFloat(getComputedStyle(stack).getPropertyValue('--folder-ratio'))||.707;stack.style.setProperty('--folder-height',(width/ratio)+'px');}});resize.observe(stack);
  if(host.tagName==='DIALOG'&&!host.open)host.showModal();
 }
