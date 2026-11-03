@@ -150,11 +150,19 @@ export async function openCharacterCatalog(root){
  await Promise.all([...stage.querySelectorAll('img')].map(img=>img.decode().catch(()=>{})));
  const openingStarted=performance.now();
  const box=stage.getBoundingClientRect(),front=stage.querySelector('.dossier-front');
- const travel=stage.animate([{transform:'translate('+(start.left-box.left)+'px,'+(start.top-box.top)+'px) scale('+(start.width/width)+')'},{transform:'translate(-22%,0) scale(.94)',offset:.22},{transform:'translate(0,0) scale(1)'}],{duration:4800,easing:'cubic-bezier(.3,.1,.3,1)',fill:'forwards'});
- const hinge=front.animate([{transform:'rotateY(0deg)'},{transform:'rotateY(-12deg)',offset:.18},{transform:'rotateY(-165deg)'}],{duration:4800,easing:'cubic-bezier(.35,.05,.3,1)',fill:'forwards'});
+
+ const x0=start.left-box.left,y0=start.top-box.top,s0=start.width/width;
  status.textContent=character.name+' · 서류철을 펼치는 중';
- await Promise.all([travel.finished,hinge.finished]);
- await new Promise(resolve=>setTimeout(resolve,Math.max(650,5450-(performance.now()-openingStarted))));
+ await new Promise(resolve=>{
+ let started=null;const duration=4800,ease=t=>t*t*(3-2*t);
+ function draw(now){if(started===null)started=now;const t=Math.min(1,(now-started)/duration),p=ease(t),turn=ease(Math.max(0,(t-.12)/.88));
+ stage.style.setProperty('transform','translate('+(x0*(1-p))+'px,'+(y0*(1-p))+'px) scale('+(s0+(1-s0)*p)+')','important');
+ front.style.setProperty('transform','rotateY('+(-165*turn)+'deg)','important');
+ layer.dataset.progress=String(Math.round(t*100));
+ if(t<1)requestAnimationFrame(draw);else resolve();}
+ requestAnimationFrame(draw);
+ });
+ await new Promise(resolve=>setTimeout(resolve,650));
  const target=new URL(location.href);target.searchParams.set('character',character.id);location.assign(target.href);
  }
  const selectedId=new URL(location.href).searchParams.get('character'),selected=records.find(c=>c.id===selectedId);
