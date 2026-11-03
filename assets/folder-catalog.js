@@ -37,12 +37,14 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .folder-copy{display:none}
  @media(max-width:540px){#ss-blue-silver .folder-inside{top:10%;gap:0}#ss-blue-silver .folder-portrait{width:66.6667%;height:auto}}
 
- #ss-blue-silver .folder-nameplate{position:absolute;left:50%;top:66.6667%;transform:translate(-50%,-50%);width:88%;padding:10px 12px;background:#f3ecd9;color:#303a42;border:1px solid #988d75;box-shadow:0 2px 5px #26333e26;text-align:center;font-family:'Noto Serif KR',serif}
- #ss-blue-silver .folder-nameplate:before,#ss-blue-silver .folder-nameplate:after{content:'';position:absolute;top:7px;bottom:7px;width:2px;background:var(--folder-edge,#988d75);opacity:.7}
- #ss-blue-silver .folder-nameplate:before{left:5px}#ss-blue-silver .folder-nameplate:after{right:5px}
- #ss-blue-silver .folder-nameplate strong{display:block;font-size:18px;font-weight:500;line-height:1.5;overflow-wrap:anywhere}
- #ss-blue-silver .folder-nameplate small{display:block;font:12px/1.6 Pretendard,sans-serif;border-top:1px solid #c6bba4;margin-top:4px;padding-top:4px}
- @media(max-width:540px){#ss-blue-silver .folder-nameplate{padding:7px 10px}#ss-blue-silver .folder-nameplate strong{font-size:15px}#ss-blue-silver .folder-nameplate small{font-size:11px}}
+
+ #ss-blue-silver .folder-nameplate{position:absolute;left:50%;top:34%;transform:translateX(-50%);width:104%;aspect-ratio:1860/846;padding:0;background:transparent;color:#202b34;border:0;box-shadow:none;text-align:center;font-family:'Noto Serif KR',serif;isolation:isolate}
+ #ss-blue-silver .folder-nameplate:before{content:'';position:absolute;inset:0;background:url('${new URL('./silver-nameplate.svg',import.meta.url).href}') center/100% 100% no-repeat;z-index:-1;pointer-events:none}
+ #ss-blue-silver .folder-nameplate:after{display:none}
+ #ss-blue-silver .folder-nameplate strong{position:absolute;top:43%;left:15%;width:70%;display:block;font-size:19px;font-weight:700;line-height:1.35;white-space:nowrap;letter-spacing:.02em;text-shadow:0 0 3px #fff,0 0 6px #fff,1px 1px 1px #f6f2e7,-1px -1px 1px #f6f2e7}
+ #ss-blue-silver .folder-nameplate small{position:absolute;top:72%;left:14%;width:72%;display:block;font:600 11px/1.4 Pretendard,sans-serif;border:0;margin:0;padding:0;white-space:nowrap;text-shadow:0 0 3px #fff,0 0 6px #fff,1px 1px 1px #f6f2e7,-1px -1px 1px #f6f2e7}
+ @media(max-width:540px){#ss-blue-silver .folder-nameplate strong{font-size:clamp(14px,4.3vw,19px)}#ss-blue-silver .folder-nameplate small{font-size:clamp(9px,2.6vw,11px)}}
+
 `;document.head.append(style);}
  host.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='목록 디자인 시안';body.replaceChildren();
  const note=document.createElement('p');note.className='catalog-note';note.textContent='폴더에 마우스를 올리거나 눌러보세요. 폴더에 표지 일러스트와 속성별 색상을 적용했습니다.';
