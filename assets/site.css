@@ -473,3 +473,15 @@ body{padding-block:24px}
 #ss-blue-silver .term-guide>button:focus-visible .term-guide-arrow{transform:translateX(4px)}
 @media(max-width:640px){#ss-blue-silver .term-guide>button{padding:16px 10px}#ss-blue-silver .term-guide-label{gap:14px}}
 @media(prefers-reduced-motion:reduce){#ss-blue-silver .term-guide>button,#ss-blue-silver .term-guide-arrow{transition:none}}
+
+/* Printed newspaper clipping background; the live search interface stays plain. */
+#ss-blue-silver #search-dialog,
+#ss-blue-silver[data-theme=dark] #search-dialog{
+ background:linear-gradient(#f0eee7b8,#f0eee7b8),url('./search-newspaper-v2.webp') center/100% 100% no-repeat;
+ color:#283039;--ink:#283039;--muted:#5c6164;--line:#a7a7a0;--accent:#324b5c;--hover:#263c4d12;
+ padding:32px 24px 28px;border:0;border-radius:0;
+}
+#ss-blue-silver #search-dialog::before,
+#ss-blue-silver #search-dialog::after{content:none}
+#ss-blue-silver #search-dialog .popup-search{background:#f5f3edb3;border-bottom:1px solid var(--ink)}
+@media(max-width:640px){#ss-blue-silver #search-dialog{padding:28px 20px 24px}}
