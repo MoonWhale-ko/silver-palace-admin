@@ -27,7 +27,6 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .folder-item:focus-visible{outline:2px solid #465f73;outline-offset:3px;border-radius:0}
  #ss-blue-silver .catalog-status{margin:22px 0 0}
  @media(max-width:540px){#ss-blue-silver .catalog-page.catalog-dialog{padding:24px 30px}#ss-blue-silver .folder-tab{font-size:clamp(12px,3.9vw,18px);top:12px;left:30px}#ss-blue-silver .folder-portrait{width:100px;height:132px}#ss-blue-silver .folder-portrait:before{left:15px;top:7px;width:29px;height:34px}#ss-blue-silver .folder-portrait:after{left:-7px;top:45px}#ss-blue-silver .folder-inside{gap:8px}#ss-blue-silver .folder-copy strong{font-size:15px}}
- @media(prefers-reduced-motion:reduce){#ss-blue-silver .folder-row,#ss-blue-silver .folder-item,#ss-blue-silver .folder-inside{transition:none}}
  
  #ss-blue-silver .folder-portrait:has(img):before,#ss-blue-silver .folder-portrait:has(img):after{display:none}
  #ss-blue-silver .folder-portrait img{width:100%;height:100%;object-fit:contain;display:block}
@@ -142,7 +141,7 @@ export async function openCharacterCatalog(root){
  const before=rows.map(r=>r.getBoundingClientRect().top);
  rows.forEach(r=>{r.getAnimations().forEach(a=>a.cancel());r.dataset.open=String(r===row);r.querySelector('button').setAttribute('aria-expanded',String(r===row));});
  const after=rows.map(r=>r.getBoundingClientRect().top),activeIndex=rows.indexOf(row);
- if(!matchMedia('(prefers-reduced-motion:reduce)').matches)rows.forEach((r,i)=>{const dy=before[i]-after[i];if(Math.abs(dy)>.5)r.animate([{transform:'translateY('+dy+'px)'},{transform:'translateY(0)'}],{duration:1800,delay:Math.min(300,Math.max(0,i-activeIndex-1)*55),easing:'linear',fill:'backwards'});});
+ rows.forEach((r,i)=>{const dy=before[i]-after[i];if(Math.abs(dy)>.5)r.animate([{transform:'translateY('+dy+'px)'},{transform:'translateY(0)'}],{duration:1800,delay:Math.min(300,Math.max(0,i-activeIndex-1)*55),easing:'linear',fill:'backwards'});});
 }
  for(let i=0;i<records.length;i++){const character=records[i],name=character.name,row=document.createElement('div');row.className='folder-row';row.style.zIndex=String(i+1);row.style.setProperty('--shift',(shifts[i%shifts.length]*1.5)+'px');row.style.setProperty('--tilt',tilts[i%tilts.length]+'deg');
  const folder=document.createElement('button');folder.type='button';folder.className='folder-item';folder.setAttribute('aria-label',name+' 표지 보기');folder.setAttribute('aria-expanded','false');
