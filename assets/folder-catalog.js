@@ -12,7 +12,7 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .folder-stack{position:relative;--folder-width:540px;--folder-ratio:.707;--closed-gap:109.5px;--reveal:.666667;--folder-height:764px;max-width:var(--folder-width);margin:54px auto 0;container-type:inline-size;padding-bottom:calc(var(--folder-height) - var(--closed-gap));isolation:isolate}
  #ss-blue-silver .folder-row{--full:var(--folder-height);height:var(--closed-gap);position:relative;will-change:transform}
  #ss-blue-silver .folder-row[data-open=true]{height:calc(var(--full) * var(--reveal))}
- #ss-blue-silver .folder-item{position:absolute;top:0;left:0;display:block;width:100%;height:var(--full);padding:0;border:0;background:transparent;text-align:left;color:#354149;transform:translate(var(--shift),0) rotate(var(--tilt));transform-origin:50% 15%;transition:transform 2s linear;cursor:pointer;overflow:visible}
+ #ss-blue-silver .folder-item{position:absolute;top:0;left:0;display:block;width:100%;height:var(--full);padding:0;border:0;background:transparent;text-align:left;color:#354149;transform:translate(var(--shift),0) rotate(var(--tilt));transform-origin:50% 15%;transition:none;cursor:pointer;overflow:visible}
  #ss-blue-silver .folder-row[data-open=true] .folder-item{transform:translate(var(--shift),-15px) rotate(0deg)}
  #ss-blue-silver .folder-shape{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 4px 4px #26333e25);fill:var(--folder-fill,#cec5b2);stroke:var(--folder-edge,#b1a792);stroke-width:1}
  #ss-blue-silver .folder-paper{position:absolute;background:#f5f0e4;border:1px solid #d6d0c4;border-radius:0;width:84%;height:88%;left:8%;top:6%;transform:rotate(-2deg)}
@@ -134,15 +134,27 @@ export async function openCharacterCatalog(root){
  const note=document.createElement('p');note.className='catalog-note';note.textContent='서류철을 선택하면 지원서를 펼쳐 봅니다.';
  const stack=document.createElement('div');stack.className='folder-stack';stack.setAttribute('aria-label','캐릭터 폴더 목록');
  const status=document.createElement('p');status.className='catalog-status';status.setAttribute('role','status');status.textContent='폴더를 선택하면 서류철을 펼친 뒤 캐릭터 기록으로 이동합니다.';
- const shifts=[-8,-3,14,6,18,-12,-7,-16,4,11,7,-5,15,-2],tilts=[-.4,-1.1,.3,.8,3.6,-.2,-.7,-2.1,.1,.6,.4,-3.3,1.2,-.5];let pinned=null,opening=false,inputType='keyboard',hoverPoint=null;
+ const shifts=[-8,-3,14,6,18,-12,-7,-16,4,11,7,-5,15,-2],tilts=[-.4,-1.1,.3,.8,3.6,-.2,-.7,-2.1,.1,.6,.4,-3.3,1.2,-.5];let pinned=null,opening=false,inputType='keyboard',hoverPoint=null,hoverDeadline=0,hoverStarted=0,hoverFinishTimer=null;
  stack.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const moved=!hoverPoint||Math.abs(hoverPoint[0]-e.clientX)>=1||Math.abs(hoverPoint[1]-e.clientY)>=1;hoverPoint=[e.clientX,e.clientY];if(moved&&e.buttons===0){const row=e.target.closest('.folder-row');if(row&&stack.contains(row))activate(row);}});
  function activate(row){
  if(opening)return;
  const rows=[...stack.querySelectorAll('.folder-row')];if(rows.every(r=>(r.dataset.open==='true')===(r===row)))return;
- const before=rows.map(r=>r.getBoundingClientRect().top);
- rows.forEach(r=>{r.getAnimations().forEach(a=>a.cancel());r.dataset.open=String(r===row);r.querySelector('button').setAttribute('aria-expanded',String(r===row));});
- const after=rows.map(r=>r.getBoundingClientRect().top);
- rows.forEach((r,i)=>{const dy=before[i]-after[i];if(Math.abs(dy)>.5)r.animate([{transform:'translateY('+dy+'px)'},{transform:'translateY(0)'}],{duration:2000,delay:0,easing:'linear',fill:'backwards'});});
+ const now=performance.now();
+ if(now>=hoverDeadline){hoverStarted=now;hoverDeadline=now+1950;}
+ const duration=Math.max(0,hoverDeadline-now);
+ const before=rows.map(r=>({top:r.getBoundingClientRect().top,front:getComputedStyle(r.querySelector('.folder-item')).transform}));
+ rows.forEach(r=>{r.getAnimations().forEach(a=>a.cancel());r.querySelector('.folder-item').getAnimations().forEach(a=>a.cancel());r.dataset.open=String(r===row);r.querySelector('button').setAttribute('aria-expanded',String(r===row));});
+ const animations=[];
+ rows.forEach((r,i)=>{
+  const front=r.querySelector('.folder-item'),dy=before[i].top-r.getBoundingClientRect().top,target=getComputedStyle(front).transform;
+  const timing={duration,delay:0,easing:'linear',fill:'none'};
+  if(Math.abs(dy)>.5)animations.push(r.animate([{transform:'translateY('+dy+'px)'},{transform:'translateY(0)'}],timing));
+  if(before[i].front!==target)animations.push(front.animate([{transform:before[i].front},{transform:target}],timing));
+ });
+ stack.dataset.hoverMotion='running';stack.dataset.hoverStarted=String(hoverStarted);stack.dataset.hoverDeadline=String(hoverDeadline);
+ clearTimeout(hoverFinishTimer);
+ hoverFinishTimer=setTimeout(()=>{animations.forEach(a=>{if(a.playState!=='finished')a.finish();});stack.dataset.hoverMotion='finished';stack.dataset.hoverElapsed=String(performance.now()-hoverStarted);},duration);
+
 }
  for(let i=0;i<records.length;i++){const character=records[i],name=character.name,row=document.createElement('div');row.className='folder-row';row.style.zIndex=String(i+1);row.style.setProperty('--shift',(shifts[i%shifts.length]*1.5)+'px');row.style.setProperty('--tilt',tilts[i%tilts.length]+'deg');
  const folder=document.createElement('button');folder.type='button';folder.className='folder-item';folder.setAttribute('aria-label',name+' 표지 보기');folder.setAttribute('aria-expanded','false');
