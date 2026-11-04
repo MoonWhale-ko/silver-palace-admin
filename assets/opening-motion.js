@@ -1,5 +1,5 @@
 // Advance by painted frames, rather than jumping after a slow frame or hidden tab.
-export function playOpening(render, {duration = 2000, schedule = requestAnimationFrame,
+export function playOpening(render, {duration = 2400, schedule = requestAnimationFrame,
  visible = () => !document.hidden} = {}) {
  return new Promise(resolve => {
   let previous = null, elapsed = 0;

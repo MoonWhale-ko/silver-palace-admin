@@ -12,7 +12,7 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .folder-stack{position:relative;--folder-width:540px;--folder-ratio:.707;--closed-gap:109.5px;--reveal:.666667;--folder-height:764px;max-width:var(--folder-width);margin:54px auto 0;container-type:inline-size;padding-bottom:calc(var(--folder-height) - var(--closed-gap));isolation:isolate}
  #ss-blue-silver .folder-row{--full:var(--folder-height);height:var(--closed-gap);position:relative;will-change:transform}
  #ss-blue-silver .folder-row[data-open=true]{height:calc(var(--full) * var(--reveal))}
- #ss-blue-silver .folder-item{position:absolute;top:0;left:0;display:block;width:100%;height:var(--full);padding:0;border:0;background:transparent;text-align:left;color:#354149;transform:translate(var(--shift),0) rotate(var(--tilt));transform-origin:50% 15%;transition:transform 1.4s linear;cursor:pointer;overflow:visible}
+ #ss-blue-silver .folder-item{position:absolute;top:0;left:0;display:block;width:100%;height:var(--full);padding:0;border:0;background:transparent;text-align:left;color:#354149;transform:translate(var(--shift),0) rotate(var(--tilt));transform-origin:50% 15%;transition:transform 2s linear;cursor:pointer;overflow:visible}
  #ss-blue-silver .folder-row[data-open=true] .folder-item{transform:translate(var(--shift),-15px) rotate(0deg)}
  #ss-blue-silver .folder-shape{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 4px 4px #26333e25);fill:var(--folder-fill,#cec5b2);stroke:var(--folder-edge,#b1a792);stroke-width:1}
  #ss-blue-silver .folder-paper{position:absolute;background:#f5f0e4;border:1px solid #d6d0c4;border-radius:0;width:84%;height:88%;left:8%;top:6%;transform:rotate(-2deg)}
@@ -141,7 +141,7 @@ export async function openCharacterCatalog(root){
  const before=rows.map(r=>r.getBoundingClientRect().top);
  rows.forEach(r=>{r.getAnimations().forEach(a=>a.cancel());r.dataset.open=String(r===row);r.querySelector('button').setAttribute('aria-expanded',String(r===row));});
  const after=rows.map(r=>r.getBoundingClientRect().top),activeIndex=rows.indexOf(row);
- rows.forEach((r,i)=>{const dy=before[i]-after[i];if(Math.abs(dy)>.5)r.animate([{transform:'translateY('+dy+'px)'},{transform:'translateY(0)'}],{duration:1800,delay:Math.min(300,Math.max(0,i-activeIndex-1)*55),easing:'linear',fill:'backwards'});});
+ rows.forEach((r,i)=>{const dy=before[i]-after[i];if(Math.abs(dy)>.5)r.animate([{transform:'translateY('+dy+'px)'},{transform:'translateY(0)'}],{duration:2000,delay:Math.min(300,Math.max(0,i-activeIndex-1)*55),easing:'linear',fill:'backwards'});});
 }
  for(let i=0;i<records.length;i++){const character=records[i],name=character.name,row=document.createElement('div');row.className='folder-row';row.style.zIndex=String(i+1);row.style.setProperty('--shift',(shifts[i%shifts.length]*1.5)+'px');row.style.setProperty('--tilt',tilts[i%tilts.length]+'deg');
  const folder=document.createElement('button');folder.type='button';folder.className='folder-item';folder.setAttribute('aria-label',name+' 표지 보기');folder.setAttribute('aria-expanded','false');
