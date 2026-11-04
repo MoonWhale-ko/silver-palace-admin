@@ -120,6 +120,7 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .folder-paper{border:0;box-shadow:none}
  #ss-blue-silver .dossier-sheets .dossier-sheet{border:0;box-shadow:none}
  #ss-blue-silver .dossier-resume{border:0;box-shadow:none}
+ #ss-blue-silver .dossier-sheets .folder-paper.dossier-sheet{width:auto;height:auto;left:10%;right:10%;top:8%;bottom:7%;background:#e9dfc8 url('${new URL('./page-paper-original-v11.webp',import.meta.url).href}') center/200% auto}
 `;document.head.append(style);}
  if(!document.getElementById('nameplate-ink-defs')){const defs=document.createElementNS('http://www.w3.org/2000/svg','svg');defs.id='nameplate-ink-defs';defs.setAttribute('width','0');defs.setAttribute('height','0');defs.setAttribute('aria-hidden','true');defs.style.position='absolute';defs.innerHTML='<defs><filter id="nameplate-ink" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.16863 0 0 0 0 0.20392 0 0 0 1 0"/></filter></defs>';document.body.append(defs);}
  host.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='목록 디자인 시안';body.replaceChildren();
@@ -151,38 +152,38 @@ export async function openCharacterCatalog(root){
 
  function makeDossier(source,selected){ const stage=document.createElement('div');stage.className='dossier-stage';stage.style.cssText=source.style.cssText;stage.style.removeProperty('z-index');
  const page=document.createElement('article');page.className='dossier-resume';const title=document.createElement('h2');title.textContent='이력서';const person=document.createElement('h3');person.textContent=selected.name;const meta=document.createElement('p');meta.textContent=selected.element+' / '+selected.job;const pending=document.createElement('p');pending.className='resume-pending';pending.textContent='상세 내용 준비 중';page.append(title,person,meta,pending);
- const front=document.createElement('div');front.className='folder-item dossier-front';front.innerHTML=source.querySelector('.folder-item').innerHTML;front.setAttribute('aria-hidden','true');
- const reverse=document.createElement('div');reverse.className='dossier-reverse';reverse.innerHTML='<svg viewBox="0 0 360 509" preserveAspectRatio="none" aria-hidden="true"><path transform="translate(360 0) scale(-1 1)" d="M18 8 H155 Q160 8 163 12 L174 27 Q177 30 183 30 H342 Q348 30 348 36 V499 Q348 505 342 505 H18 Q12 505 12 499 V14 Q12 8 18 8 Z"/></svg>';front.querySelectorAll('.folder-paper,.folder-back-cover,.folder-spine').forEach(p=>p.remove());front.append(reverse);const rear=document.createElement('div');rear.className='dossier-rear';rear.setAttribute('aria-hidden','true');const sheets=document.createElement('div');sheets.className='dossier-sheets';sheets.setAttribute('aria-hidden','true');for(let i=0;i<3;i++){const sheet=document.createElement('div');sheet.className='dossier-sheet sheet-'+i;sheet.innerHTML='<i></i><i></i><i></i><i></i>';sheets.append(sheet);}const fields=document.createElement('dl');fields.className='resume-fields';for(const [label,value] of [['이름',selected.name],['속성',selected.element],['직군',selected.job]]){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;fields.append(dt,dd);}meta.replaceWith(fields);
+ const front=source.querySelector('.folder-item');front.classList.add('dossier-front');front.setAttribute('aria-hidden','true');
+ const reverse=document.createElement('div');reverse.className='dossier-reverse';reverse.innerHTML='<svg viewBox="0 0 360 509" preserveAspectRatio="none" aria-hidden="true"><path transform="translate(360 0) scale(-1 1)" d="M18 8 H155 Q160 8 163 12 L174 27 Q177 30 183 30 H342 Q348 30 348 36 V499 Q348 505 342 505 H18 Q12 505 12 499 V14 Q12 8 18 8 Z"/></svg>';const insertedPapers=[...front.querySelectorAll('.folder-paper')];front.querySelectorAll('.folder-back-cover,.folder-spine').forEach(p=>p.remove());front.append(reverse);const rear=document.createElement('div');rear.className='dossier-rear';rear.setAttribute('aria-hidden','true');const sheets=document.createElement('div');sheets.className='dossier-sheets';sheets.setAttribute('aria-hidden','true');insertedPapers.forEach((sheet,i)=>{sheet.classList.add('dossier-sheet','sheet-'+i);sheet.style.cssText='';sheets.append(sheet);});const fields=document.createElement('dl');fields.className='resume-fields';for(const [label,value] of [['이름',selected.name],['속성',selected.element],['직군',selected.job]]){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;fields.append(dt,dd);}meta.replaceWith(fields);
 
  const binding=document.createElement('div');binding.className='dossier-binding';binding.setAttribute('aria-hidden','true');stage.append(rear,binding,sheets,page,front);return stage;
  }
  async function beginOpening(row,character){
  if(opening)return;
  opening=true;
- const folder=row.querySelector('.folder-item'),start=folder.getBoundingClientRect();
+ const folder=row.querySelector('.folder-item'),start=folder.getBoundingClientRect();const originalChildren=[...folder.childNodes],originalClass=folder.className,originalStyle=folder.getAttribute('style'),originalHidden=folder.getAttribute('aria-hidden'),paperStates=[...folder.querySelectorAll('.folder-paper')].map(node=>({node,style:node.getAttribute('style'),className:node.className}));row.classList.add('folder-extracted');
  const layer=document.createElement('div');layer.className='folder-opening';layer.setAttribute('role','status');layer.setAttribute('aria-label',character.name+' 서류철을 펼치는 중');
  const stage=makeDossier(row,character);stage.classList.add('opening-stage');layer.append(stage);root.append(layer);
  const width=Math.min(440,innerWidth*.44,innerHeight*.707*.78),height=width/.707;
  Object.assign(stage.style,{width:width+'px',height:height+'px',left:(innerWidth/2)+'px',top:Math.max(24,(innerHeight-height)/2)+'px'});
  stage.dataset.open='false';
  stage.querySelectorAll('img').forEach(img=>{img.loading='eager';});
- await Promise.all([...stage.querySelectorAll('img')].map(img=>img.decode().catch(()=>{})));
+ 
  
  const box=stage.getBoundingClientRect(),front=stage.querySelector('.dossier-front');
 
- const x0=start.left-box.left,y0=start.top-box.top,s0=start.width/width;
+ const x0=start.left-box.left,y0=start.top-box.top,s0=start.width/width;stage.style.setProperty('transform','translate('+x0+'px,'+y0+'px) scale('+s0+')','important');
  status.textContent=character.name+' · 서류철을 펼치는 중';
  await new Promise(resolve=>{
  let started=null;const duration=2400,ease=t=>t*t*(3-2*t);
- function draw(now){if(started===null)started=now;const t=Math.min(1,(now-started)/duration),p=ease(t),turn=ease(Math.max(0,(t-.12)/.88));
+ function draw(now){if(started===null)started=now;const t=Math.min(1,(now-started)/duration),p=ease(Math.min(1,t/.55)),turn=ease(Math.max(0,Math.min(1,(t-.3)/.7)));
  stage.style.setProperty('transform','translate('+(x0*(1-p))+'px,'+(y0*(1-p))+'px) scale('+(s0+(1-s0)*p)+')','important');
  front.style.setProperty('transform','rotateY('+(-178*turn)+'deg)','important');
- layer.dataset.progress=String(Math.round(t*100));
+ stage.querySelector('.dossier-sheets').style.transform='translateY('+(8*(1-p))+'px)';layer.dataset.progress=String(Math.round(t*100));
  if(t<1)requestAnimationFrame(draw);else resolve();}
  requestAnimationFrame(draw);
  });
  layer.dataset.state='opened';layer.setAttribute('aria-label',character.name+' 펼쳐진 서류철');status.textContent=character.name+' · 펼쳐진 상태';
- const close=document.createElement('button');close.type='button';close.className='opening-return';close.textContent='목록으로 돌아가기';close.onclick=()=>{layer.remove();opening=false;folder.focus({preventScroll:true});};layer.append(close);
+ const close=document.createElement('button');close.type='button';close.className='opening-return';close.textContent='목록으로 돌아가기';close.onclick=()=>{folder.replaceChildren(...originalChildren);folder.className=originalClass;if(originalStyle===null)folder.removeAttribute('style');else folder.setAttribute('style',originalStyle);if(originalHidden===null)folder.removeAttribute('aria-hidden');else folder.setAttribute('aria-hidden',originalHidden);paperStates.forEach(s=>{s.node.className=s.className;if(s.style===null)s.node.removeAttribute('style');else s.node.setAttribute('style',s.style);});row.append(folder);row.classList.remove('folder-extracted');layer.remove();opening=false;folder.focus({preventScroll:true});};layer.append(close);
  }
  const selectedId=new URL(location.href).searchParams.get('character'),selected=records.find(c=>c.id===selectedId);
  if(selected){
