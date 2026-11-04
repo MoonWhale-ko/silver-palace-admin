@@ -20,3 +20,5 @@ time,.numeric,[data-font-role="number"]{font-family:var(--font-number);font-vari
 .font-display-ko,[data-font-role="display-ko"]{font-family:var(--font-display-ko);font-weight:400}
 .font-display-en,[data-font-role="display-en"]{font-family:var(--font-display-en);font-weight:400;letter-spacing:normal}
 .font-display-classic,[data-font-role="display-classic"]{font-family:var(--font-display-classic);font-weight:400}
+
+@font-face{font-family:SilverPalaceScript;src:url('./fonts/silver-palace-script.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap}
