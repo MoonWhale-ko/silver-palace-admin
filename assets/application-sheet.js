@@ -1,8 +1,10 @@
+export const partyPortrait = character => new URL('./party-icons/'+character.id+'.webp',import.meta.url).href;
 const template = new URL('./character-application-aged.webp', import.meta.url).href;
 
 export function createApplication(character) {
  const sheet = document.createElement('figure');
  sheet.className = 'application-sheet';
+ sheet.dataset.previewOnly = 'true';
  sheet.setAttribute('aria-label', character.name + ' 지원서');
  const paper = document.createElement('img');
  paper.className = 'application-template';
@@ -13,7 +15,7 @@ export function createApplication(character) {
  paper.decoding = 'async';
  const photo = document.createElement('img');
  photo.className = 'application-photo';
- photo.src = character.portrait || character.cover;
+ photo.src = partyPortrait(character);
  photo.alt = character.name;
  const name = document.createElement('span');
  name.className = 'application-name';
