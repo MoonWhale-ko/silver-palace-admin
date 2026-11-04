@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build.mjs",
-    "check": "node --check assets/folder-catalog.js && node --check assets/application-sheet.js && node --check assets/home.js && node --check editor/editor.js && node --check editor/archive.js && node --check scripts/build.mjs && node --check assets/site-runtime.js && node --check assets/search-popup.js && node --check assets/search-model.js",
+    "check": "node --check assets/folder-catalog.js && node --check assets/opening-motion.js && node --check assets/application-sheet.js && node --check assets/home.js && node --check editor/editor.js && node --check editor/archive.js && node --check scripts/build.mjs && node --check assets/site-runtime.js && node --check assets/search-popup.js && node --check assets/search-model.js",
     "test": "node --test test/*.test.mjs"
   }
 }

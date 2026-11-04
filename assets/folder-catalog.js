@@ -1,3 +1,4 @@
+import {playOpening} from './opening-motion.js';
 import {createApplication} from './application-sheet.js';
 export async function openCharacterCatalog(root){
  let records;try{const response=await fetch(new URL('../data/characters.json',import.meta.url),{cache:'no-cache'});if(!response.ok)throw Error();records=(await response.json()).characters;}catch{root.querySelector('#dialog-content').textContent='캐릭터 데이터를 불러오지 못했습니다. 새로고침해주세요.';return;}
@@ -96,6 +97,7 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .resume-fields dt,#ss-blue-silver .resume-fields dd{margin:0;padding:9px 4px;border-bottom:1px solid #a69d8b}
  #ss-blue-silver .resume-fields dt{color:#6b695f}
  #ss-blue-silver .dossier-stage.is-resetting,#ss-blue-silver .dossier-stage.is-resetting .dossier-front{transition:none}
+ #ss-blue-silver .folder-row.folder-extracted>.folder-item{visibility:hidden}
  #ss-blue-silver .folder-opening{position:fixed;inset:0;z-index:10000;background:#242b3566;overflow:hidden;pointer-events:auto;perspective:1800px}
  #ss-blue-silver .folder-opening .opening-stage{position:absolute;margin:0;aspect-ratio:.707;transform:none;transform-origin:0 0;transition:none;perspective:1800px;--full:100%}
  #ss-blue-silver .folder-opening .dossier-front{transition:none;transform:rotateY(0deg)}
@@ -168,7 +170,7 @@ export async function openCharacterCatalog(root){
  if(opening)return;
  opening=true;
  const folder=row.querySelector('.folder-item'),start=folder.getBoundingClientRect();row.classList.add('folder-extracted');
- const layer=document.createElement('div');layer.className='folder-opening';layer.setAttribute('role','status');layer.setAttribute('aria-label',character.name+' 서류철을 펼치는 중');
+ const layer=document.createElement('div');layer.className='folder-opening';layer.style.visibility='hidden';layer.setAttribute('role','status');layer.setAttribute('aria-label',character.name+' 서류철을 펼치는 중');
  const stage=makeDossier(row.cloneNode(true),character);stage.classList.add('opening-stage');layer.append(stage);root.append(layer);
  const width=Math.min(440,innerWidth*.44,innerHeight*.707*.78),height=width/.707;
  Object.assign(stage.style,{width:width+'px',height:height+'px',left:(innerWidth/2)+'px',top:Math.max(24,(innerHeight-height)/2)+'px'});
@@ -181,18 +183,17 @@ export async function openCharacterCatalog(root){
 
  const x0=start.left-box.left,y0=start.top-box.top,s0=start.width/width;stage.style.setProperty('transform','translate('+x0+'px,'+y0+'px) scale('+s0+')','important');
  status.textContent=character.name+' · 서류철을 펼치는 중';
- await new Promise(resolve=>{
- let started=null;const duration=matchMedia('(prefers-reduced-motion:reduce)').matches?0:2400,ease=t=>t*t*(3-2*t);
- function draw(now){if(started===null)started=now;const t=duration===0?1:Math.min(1,(now-started)/duration),p=ease(Math.min(1,t/.55)),turn=ease(Math.max(0,Math.min(1,(t-.3)/.7)));
+ const ease=t=>t*t*(3-2*t);
+ layer.style.visibility='visible';
+ await playOpening(t=>{
+ const p=ease(Math.min(1,t/.55)),turn=ease(Math.max(0,Math.min(1,(t-.3)/.7)));
  stage.style.setProperty('transform','translate('+(x0*(1-p))+'px,'+(y0*(1-p))+'px) scale('+(s0+(1-s0)*p)+')','important');
  front.style.setProperty('transform','rotateY('+(-178*turn)+'deg)','important');
  layer.dataset.progress=String(Math.round(t*100));
- if(t<1)requestAnimationFrame(draw);else resolve();}
- requestAnimationFrame(draw);
  });
  layer.dataset.state='opened';layer.setAttribute('aria-label',character.name+' 펼쳐진 서류철');status.textContent=character.name+' · 펼쳐진 상태';
  const destination=new URL('../characters.html',import.meta.url);destination.searchParams.set('character',character.id);
- await new Promise(resolve=>setTimeout(resolve,matchMedia('(prefers-reduced-motion:reduce)').matches?0:550));
+ await new Promise(resolve=>setTimeout(resolve,750));
  location.assign(destination);
  }
  const selectedId=new URL(location.href).searchParams.get('character'),selected=records.find(c=>c.id===selectedId);

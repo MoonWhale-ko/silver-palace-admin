@@ -6,7 +6,7 @@ validate(JSON.parse(await readFile('data/home.json','utf8')));
 await rm('dist',{recursive:true,force:true});
 await mkdir('dist',{recursive:true});
 for(const dir of ['assets','data','editor']) await cp(dir,'dist/'+dir,{recursive:true});
-const files=['characters.html','index.html','assets/folder-catalog.js','assets/application-sheet.js','assets/application-sheet.css','assets/character-application-aged.webp','assets/fonts/silver-palace-script.ttf','assets/typography.css','site.html','assets/site.css','assets/home.js','assets/site-runtime.js','assets/search-popup.js','assets/search-model.js','editor/editor.js','data/home.json'];
+const files=['characters.html','index.html','assets/folder-catalog.js','assets/application-sheet.js','assets/opening-motion.js','assets/application-sheet.css','assets/character-application-aged.webp','assets/fonts/silver-palace-script.ttf','assets/typography.css','site.html','assets/site.css','assets/home.js','assets/site-runtime.js','assets/search-popup.js','assets/search-model.js','editor/editor.js','data/home.json'];
 const version=createHash('sha256');for(const file of files)version.update(await readFile(file));const hash=version.digest('hex').slice(0,12);
 const html=await readFile('site.html','utf8');
 await writeFile('dist/site.html',html.replace('./assets/site.css','./assets/site.css?v='+hash).replace('./assets/home.js','./assets/home.js?v='+hash));
@@ -19,4 +19,4 @@ await writeFile('dist/assets/search-popup.js',(await readFile('assets/search-pop
 
 await writeFile('dist/characters.html',(await readFile('characters.html','utf8')).replace('./assets/folder-catalog.js','./assets/folder-catalog.js?v='+hash).replace('./assets/application-sheet.css','./assets/application-sheet.css?v='+hash));
 
-await writeFile('dist/assets/folder-catalog.js',(await readFile('assets/folder-catalog.js','utf8')).replace("'./application-sheet.js'", "'./application-sheet.js?v="+hash+"'"));
+await writeFile('dist/assets/folder-catalog.js',(await readFile('assets/folder-catalog.js','utf8')).replace("'./application-sheet.js'", "'./application-sheet.js?v="+hash+"'").replace("'./opening-motion.js'", "'./opening-motion.js?v="+hash+"'"));
