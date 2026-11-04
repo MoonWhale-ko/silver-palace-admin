@@ -1,4 +1,4 @@
-body{background:#382318 url('./desk/wood.webp') center top/1200px auto repeat;color:#eee2c8;min-height:100vh;overflow-x:clip}
+body{background:#382318;isolation:isolate;color:#eee2c8;min-height:100vh;overflow-x:clip}
 #ss-blue-silver{position:relative;isolation:isolate;min-height:100vh}
 #ss-blue-silver>header{position:relative;z-index:2;color:#eee2c8;border-color:#d8bd8640;max-width:1200px}
 #ss-blue-silver #b-dialog.catalog-page.catalog-dialog{color:#eee2c8;position:relative;z-index:1}
@@ -7,31 +7,7 @@ body{background:#382318 url('./desk/wood.webp') center top/1200px auto repeat;co
 #ss-blue-silver #b-dialog .catalog-note,#ss-blue-silver .catalog-sort{position:relative;z-index:2}
 #ss-blue-silver .catalog-sort select{background:#e9dec8;border-color:#a68a5e}
 #ss-blue-silver .folder-stack{z-index:1}
-.desk-vignette{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.desk-prop{position:absolute;display:block;object-fit:contain;user-select:none;pointer-events:none;filter:drop-shadow(1px 5px 5px #160c0750)}
-.desk-lamp{width:310px;right:12px;top:78px;transform:rotate(-8deg)}
-.desk-quill{width:360px;left:-20px;top:275px;transform:rotate(17deg)}
-.desk-letters{width:290px;right:-25px;top:420px;transform:rotate(11deg)}
-.desk-books{width:255px;left:-15px;bottom:22px;transform:rotate(-12deg)}
-.desk-tea{width:200px;right:42px;bottom:18px;transform:rotate(12deg)}
-@media(min-width:1600px){.desk-lamp{right:calc((100vw - 1550px)/2)}.desk-quill{left:calc((100vw - 1550px)/2)}.desk-letters{right:calc((100vw - 1600px)/2)}.desk-books{left:calc((100vw - 1500px)/2)}.desk-tea{right:calc((100vw - 1500px)/2)}}
-@media(min-width:901px) and (max-width:1100px){.desk-lamp{width:225px;right:-35px}.desk-quill{width:260px;left:-60px}.desk-letters{width:205px;right:-70px}.desk-books{width:190px;left:-40px}.desk-tea{width:150px;right:-20px}}
-@media(max-width:900px){
- body{background-size:1000px auto}
- .desk-vignette{position:relative;inset:auto;height:240px;margin:4px -24px -24px;z-index:0;overflow:visible}
- .desk-lamp{width:245px;right:2%;top:-20px;transform:rotate(-10deg)}
- .desk-letters{width:215px;left:2%;right:auto;top:15px;transform:rotate(-12deg)}
- .desk-quill{width:310px;left:20%;top:100px;transform:rotate(9deg)}
- .desk-books{width:145px;left:5%;top:135px;bottom:auto;transform:rotate(-13deg)}
- .desk-tea{width:125px;right:4%;top:130px;bottom:auto}
- #ss-blue-silver .folder-stack{margin-top:22px}
-}
-@media(max-width:540px){
- #ss-blue-silver>header{padding:18px 22px}
- .desk-vignette{height:210px;margin:8px -30px -18px}
- .desk-lamp{width:185px;right:-5px;top:-10px}
- .desk-letters{width:165px;left:-12px;top:18px}
- .desk-quill{width:235px;left:22%;top:91px;transform:rotate(-6deg)}
- .desk-books{width:105px;left:8px;top:120px}
- .desk-tea{width:92px;right:0;top:119px}
-}
+
+/* One viewport-fixed image contains both the table and every prop. */
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:#382318 url('./desk/scene.webp') center center/cover no-repeat}
+@media(max-width:540px){#ss-blue-silver>header{padding:18px 22px}}
