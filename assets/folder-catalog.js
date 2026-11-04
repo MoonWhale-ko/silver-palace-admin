@@ -108,6 +108,7 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .dossier-binding{position:absolute;left:3.3%;top:5.9%;bottom:.8%;width:3.4%;background:linear-gradient(90deg,var(--folder-edge),var(--folder-fill) 35%,var(--folder-fill) 60%,var(--folder-edge));opacity:.8;z-index:1;border-radius:2px;box-shadow:inset 1px 0 2px #fff2}
  #ss-blue-silver .dossier-reverse:after{content:'';position:absolute;left:3.5%;top:3%;bottom:1.5%;width:2.4%;background:linear-gradient(90deg,#26333e20,#fff2,transparent);border-right:1px solid #26333e20;pointer-events:none}
  #ss-blue-silver .dossier-sheet{border-radius:1px}
+ #ss-blue-silver .opening-return{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);padding:10px 18px;background:#f3eddf;color:#354149;border:1px solid #a99f8a;font:inherit;cursor:pointer}
 `;document.head.append(style);}
  if(!document.getElementById('nameplate-ink-defs')){const defs=document.createElementNS('http://www.w3.org/2000/svg','svg');defs.id='nameplate-ink-defs';defs.setAttribute('width','0');defs.setAttribute('height','0');defs.setAttribute('aria-hidden','true');defs.style.position='absolute';defs.innerHTML='<defs><filter id="nameplate-ink" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.16863 0 0 0 0 0.20392 0 0 0 1 0"/></filter></defs>';document.body.append(defs);}
  host.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='목록 디자인 시안';body.replaceChildren();
@@ -155,7 +156,7 @@ export async function openCharacterCatalog(root){
  stage.dataset.open='false';
  stage.querySelectorAll('img').forEach(img=>{img.loading='eager';});
  await Promise.all([...stage.querySelectorAll('img')].map(img=>img.decode().catch(()=>{})));
- const openingStarted=performance.now();
+ 
  const box=stage.getBoundingClientRect(),front=stage.querySelector('.dossier-front');
 
  const x0=start.left-box.left,y0=start.top-box.top,s0=start.width/width;
@@ -169,8 +170,8 @@ export async function openCharacterCatalog(root){
  if(t<1)requestAnimationFrame(draw);else resolve();}
  requestAnimationFrame(draw);
  });
- await new Promise(resolve=>setTimeout(resolve,650));
- const target=new URL(location.href);target.searchParams.set('character',character.id);location.assign(target.href);
+ layer.dataset.state='opened';layer.setAttribute('aria-label',character.name+' 펼쳐진 서류철');status.textContent=character.name+' · 펼쳐진 상태';
+ const close=document.createElement('button');close.type='button';close.className='opening-return';close.textContent='목록으로 돌아가기';close.onclick=()=>{layer.remove();opening=false;folder.focus({preventScroll:true});};layer.append(close);
  }
  const selectedId=new URL(location.href).searchParams.get('character'),selected=records.find(c=>c.id===selectedId);
  if(selected){
