@@ -140,7 +140,7 @@ export async function openCharacterCatalog(root){
  if(opening)return;
  const rows=[...stack.querySelectorAll('.folder-row')];if(rows.every(r=>(r.dataset.open==='true')===(r===row)))return;
  const now=performance.now();
- if(now>=hoverDeadline){hoverStarted=now;hoverDeadline=now+1950;}
+ if(now>=hoverDeadline){hoverStarted=now;hoverDeadline=now+950;}
  const duration=Math.max(0,hoverDeadline-now);
  const before=rows.map(r=>({top:r.getBoundingClientRect().top,front:getComputedStyle(r.querySelector('.folder-item')).transform}));
  rows.forEach(r=>{r.getAnimations().forEach(a=>a.cancel());r.querySelector('.folder-item').getAnimations().forEach(a=>a.cancel());r.dataset.open=String(r===row);r.querySelector('button').setAttribute('aria-expanded',String(r===row));});
