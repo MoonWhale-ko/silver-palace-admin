@@ -6,7 +6,7 @@ validate(JSON.parse(await readFile('data/home.json','utf8')));
 await rm('dist',{recursive:true,force:true});
 await mkdir('dist',{recursive:true});
 for(const dir of ['assets','data','editor']) await cp(dir,'dist/'+dir,{recursive:true});
-const files=['characters.html','assets/desk-scene.css','assets/desk/scene.webp','index.html','assets/folder-catalog.js','assets/application-sheet.js','assets/opening-motion.js','assets/application-sheet.css','assets/character-application-aged.webp','assets/fonts/silver-palace-script.ttf','assets/typography.css','site.html','assets/site.css','assets/home.js','assets/site-runtime.js','assets/search-popup.js','assets/search-model.js','editor/editor.js','data/home.json'];
+const files=['characters.html','assets/desk-scene.css',...['wood','lamp','quill','letters','tea','books'].map(name=>'assets/desk/'+name+'.webp'),'index.html','assets/folder-catalog.js','assets/application-sheet.js','assets/opening-motion.js','assets/application-sheet.css','assets/character-application-aged.webp','assets/fonts/silver-palace-script.ttf','assets/typography.css','site.html','assets/site.css','assets/home.js','assets/site-runtime.js','assets/search-popup.js','assets/search-model.js','editor/editor.js','data/home.json'];
 for(const character of JSON.parse(await readFile('data/characters.json','utf8')).characters) files.push('assets/party-icons/'+character.id+'.webp');
 const version=createHash('sha256');for(const file of files)version.update(await readFile(file));const hash=version.digest('hex').slice(0,12);
 const html=await readFile('site.html','utf8');
