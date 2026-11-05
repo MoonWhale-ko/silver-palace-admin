@@ -210,3 +210,11 @@
 /* Reference capsule keeps the existing sort control dimensions. */
 #ss-blue-silver #b-dialog .catalog-sort{border-color:transparent;background:transparent url('./catalog-sort-bg.png') center/100% 100% no-repeat;clip-path:none;box-shadow:none;filter:drop-shadow(0 2px 2px #160c072b)}
 #ss-blue-silver #b-dialog #dialog-title:after{height:6px;background:transparent url('./catalog-divider.png') center/100% 100% no-repeat;mask:none;-webkit-mask:none}
+
+/* Taller masthead with the logo lettering aligned around 실's inner gap. */
+#ss-blue-silver>header.catalog-header{height:76px}
+#ss-blue-silver{padding-top:116px}
+.catalog-brand img{transform:translateY(-7px)}
+#ss-blue-silver #b-dialog .catalog-sort{position:relative;isolation:isolate;background:none}
+#ss-blue-silver #b-dialog .catalog-sort:before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;background:#eee5ce;mask:url('./catalog-sort-bg.png') center/100% 100% no-repeat;-webkit-mask:url('./catalog-sort-bg.png') center/100% 100% no-repeat}
+@media(max-width:640px){#ss-blue-silver>header.catalog-header{height:72px}#ss-blue-silver{padding-top:104px}.catalog-brand img{transform:translateY(-6px)}}
