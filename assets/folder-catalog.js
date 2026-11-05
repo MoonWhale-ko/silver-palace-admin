@@ -131,7 +131,6 @@ export async function openCharacterCatalog(root){
 `;document.head.append(style);}
  if(!document.getElementById('nameplate-ink-defs')){const defs=document.createElementNS('http://www.w3.org/2000/svg','svg');defs.id='nameplate-ink-defs';defs.setAttribute('width','0');defs.setAttribute('height','0');defs.setAttribute('aria-hidden','true');defs.style.position='absolute';defs.innerHTML='<defs><filter id="nameplate-ink" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="0 0 0 0 0.12549 0 0 0 0 0.16863 0 0 0 0 0.20392 0 0 0 1 0"/></filter></defs>';document.body.append(defs);}
  host.classList.add('catalog-dialog');root.querySelector('#dialog-title').textContent='캐릭터 도감';root.querySelector('#dialog-status').textContent='캐릭터 기록 보관함';body.replaceChildren();
- const note=document.createElement('p');note.className='catalog-note';note.textContent='서류철을 선택하면 지원서를 펼쳐 봅니다.';
  const stack=document.createElement('div');stack.className='folder-stack';stack.setAttribute('aria-label','캐릭터 폴더 목록');
  const status=document.createElement('p');status.className='catalog-status';status.setAttribute('role','status');status.textContent='폴더를 선택하면 서류철을 펼친 뒤 캐릭터 기록으로 이동합니다.';
  const shifts=[-8,-3,14,6,18,-12,-7,-16,4,11,7,-5,15,-2],tilts=[-.4,-1.1,.3,.8,3.6,-.2,-.7,-2.1,.1,.6,.4,-3.3,1.2,-.5];let pinned=null,opening=false,inputType='keyboard',hoverPoint=null,hoverDeadline=0,hoverStarted=0,hoverFinishTimer=null;
@@ -170,7 +169,7 @@ export async function openCharacterCatalog(root){
  sort.onchange=()=>{pinned=null;activate(null);const field=sort.value;const ordered=[...records].sort((a,b)=>(field==='name'?0:collator.compare(a[field],b[field]))||byName(a,b));const rows=new Map([...stack.children].map(r=>[r.dataset.characterId,r]));ordered.forEach((c,i)=>{const row=rows.get(c.id);row.getAnimations().forEach(a=>a.cancel());row.style.zIndex=String(i+1);stack.append(row);});status.textContent=records.length+'개 캐릭터 항목 · '+sort.selectedOptions[0].textContent;};
  const desk=document.createElement('div');desk.className='desk-vignette';desk.setAttribute('aria-hidden','true');
  for(const prop of ['lamp','letters','quill','books','tea']){const image=document.createElement('img');image.className='desk-prop desk-'+prop;image.src=new URL('./desk/'+prop+'.webp',import.meta.url).href;image.alt='';image.decoding='async';image.draggable=false;desk.append(image);}
- body.append(note,controls,desk,stack,status);
+ body.append(controls,desk,stack,status);
 
 
  function makeDossier(source,selected){ const stage=document.createElement('div');stage.className='dossier-stage';stage.style.cssText=source.style.cssText;stage.style.removeProperty('z-index');
