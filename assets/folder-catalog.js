@@ -80,7 +80,7 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .dossier-replay{display:block;margin:16px auto;padding:9px 18px;font:inherit;color:#354149;border:1px solid #a99f8a;background:#f3eddf;cursor:pointer}
  @media(prefers-reduced-motion:reduce){#ss-blue-silver .dossier-stage,#ss-blue-silver .dossier-stage .dossier-front{transition:none}}
  #ss-blue-silver .dossier-stage{width:min(380px,42vw)}
- #ss-blue-silver .dossier-rear{position:absolute;inset:5.9% 3.333% .8%;background:var(--folder-fill);border:1px solid var(--folder-edge);box-shadow:2px 5px 9px #26333e35;z-index:0}
+ #ss-blue-silver .dossier-rear{position:absolute;inset:1.571709% 3.333% .785855%;background:var(--folder-fill);border:1px solid var(--folder-edge);box-shadow:2px 5px 9px #26333e35;z-index:0}
  #ss-blue-silver .dossier-rear:after{content:'';position:absolute;inset:0;background:linear-gradient(90deg,#26333e18,transparent 6%,transparent 95%,#fff1);pointer-events:none}
  #ss-blue-silver .dossier-sheets{position:absolute;inset:0;z-index:1}
  #ss-blue-silver .dossier-sheet{position:absolute;inset:9% 8% 5%;background:#e9dfc8 url('${new URL('./page-paper-original-v11.webp',import.meta.url).href}') center/200% auto;border:1px solid #bdb29b;box-shadow:0 1px 3px #26333e26;padding:12% 10%}
@@ -103,16 +103,16 @@ export async function openCharacterCatalog(root){
  #ss-blue-silver .folder-opening .dossier-front .folder-shape{filter:drop-shadow(0 10px 15px #18232e45)}
  #ss-blue-silver .folder-opening .dossier-resume{overflow:hidden}
  #ss-blue-silver .character-record{padding:30px;background:#eee4ce url('${new URL('./page-paper-original-v11.webp',import.meta.url).href}') center/150% auto;color:#303a42;min-height:360px}
- #ss-blue-silver .folder-back-cover{position:absolute;left:3.7%;right:2.7%;top:6.1%;bottom:.35%;border-radius:5px;background:var(--folder-fill);border:1px solid var(--folder-edge);box-shadow:1px 2px 0 var(--folder-edge),2px 4px 5px #26333e25;z-index:0}
+ #ss-blue-silver .folder-back-cover{position:absolute;left:3.7%;right:2.7%;top:1.571709%;bottom:.785855%;border-radius:5px;background:var(--folder-fill);border:1px solid var(--folder-edge);box-shadow:1px 2px 0 var(--folder-edge),2px 4px 5px #26333e25;z-index:0}
  #ss-blue-silver .folder-spine{position:absolute;left:3.6%;top:3%;bottom:1.5%;width:2.6%;z-index:2;pointer-events:none;background:linear-gradient(90deg,#fff2,transparent 28%,#26333e14 72%,#26333e30 85%,#fff2);border-right:1px solid #26333e23;border-left:1px solid #ffffff18;border-radius:2px}
  #ss-blue-silver .folder-shape{stroke-width:.8;filter:drop-shadow(0 2px 1px #26333e28) drop-shadow(0 5px 4px #26333e20)}
  #ss-blue-silver .dossier-rear{border-radius:5px;box-shadow:1px 2px 0 var(--folder-edge),2px 5px 9px #26333e30}
- #ss-blue-silver .dossier-binding{position:absolute;left:3.3%;top:5.9%;bottom:.8%;width:3.4%;background:linear-gradient(90deg,var(--folder-edge),var(--folder-fill) 35%,var(--folder-fill) 60%,var(--folder-edge));opacity:.8;z-index:1;border-radius:2px;box-shadow:inset 1px 0 2px #fff2}
+ #ss-blue-silver .dossier-binding{position:absolute;left:3.3%;top:1.571709%;bottom:.785855%;width:3.4%;background:linear-gradient(90deg,var(--folder-edge),var(--folder-fill) 35%,var(--folder-fill) 60%,var(--folder-edge));opacity:.8;z-index:1;border-radius:2px;box-shadow:inset 1px 0 2px #fff2}
  #ss-blue-silver .dossier-reverse:after{content:'';position:absolute;left:3.5%;top:3%;bottom:1.5%;width:2.4%;background:linear-gradient(90deg,#26333e20,#fff2,transparent);border-right:1px solid #26333e20;pointer-events:none}
  #ss-blue-silver .dossier-sheet{border-radius:1px}
  #ss-blue-silver .opening-return{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);padding:10px 18px;background:#f3eddf;color:#354149;border:1px solid #a99f8a;font:inherit;cursor:pointer}
  #ss-blue-silver .dossier-reverse:after{display:none}
- #ss-blue-silver .dossier-binding{left:3.333%;top:5.9%;bottom:.8%;width:1%;background:var(--folder-edge);opacity:.35;border:0;box-shadow:none}
+ #ss-blue-silver .dossier-binding{left:3.333%;top:1.571709%;bottom:.785855%;width:1%;background:var(--folder-edge);opacity:.35;border:0;box-shadow:none}
  #ss-blue-silver .dossier-sheets .dossier-sheet{inset:8% 10% 7%;padding:10% 7%;border-radius:1px;box-shadow:0 1px 2px #26333e18}
  #ss-blue-silver .dossier-sheets .sheet-0{transform:translate(.9%,.9%);z-index:3}
  #ss-blue-silver .dossier-sheets .sheet-1{transform:translate(1.8%,1.8%);z-index:2}
