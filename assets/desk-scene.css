@@ -7,29 +7,21 @@ body{background:#382318;isolation:isolate;color:#eee2c8;min-height:100vh;overflo
 #ss-blue-silver #b-dialog .catalog-note,#ss-blue-silver .catalog-sort{position:relative;z-index:2}
 #ss-blue-silver .catalog-sort select{background:#e9dec8;border-color:#a68a5e}
 #ss-blue-silver .folder-stack{z-index:1}
-.desk-vignette{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
-.desk-prop{position:absolute;display:block;object-fit:contain;user-select:none;pointer-events:none;filter:drop-shadow(1px 5px 5px #160c0750)}
-.desk-lamp{width:310px;right:12px;top:78px;transform:rotate(-8deg)}
-.desk-quill{width:360px;left:-20px;top:275px;transform:rotate(17deg)}
-.desk-letters{width:290px;right:-25px;top:420px;transform:rotate(11deg)}
-.desk-books{width:255px;left:-15px;bottom:22px;transform:rotate(-12deg)}
-.desk-tea{width:200px;right:42px;bottom:18px;transform:rotate(12deg)}
-@media(min-width:1600px){.desk-lamp{right:calc((100vw - 1550px)/2)}.desk-quill{left:calc((100vw - 1550px)/2)}.desk-letters{right:calc((100vw - 1600px)/2)}.desk-books{left:calc((100vw - 1500px)/2)}.desk-tea{right:calc((100vw - 1500px)/2)}}
-@media(min-width:901px) and (max-width:1100px){.desk-lamp{width:225px;right:-35px}.desk-quill{width:260px;left:-60px}.desk-letters{width:205px;right:-70px}.desk-books{width:190px;left:-40px}.desk-tea{width:150px;right:-20px}}
-/* Keep one uninterrupted wood surface fixed to the viewport. Props stay separate. */
+/* A 24 cm document folder is 540 px wide; every prop uses the same scale.
+   Widths include the transparent margins in the original asset files. */
+.desk-vignette{--desk-unit:min(22.5px,calc((100vw - 60px)/24));position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.desk-prop{position:absolute;display:block;object-fit:contain;user-select:none;pointer-events:none;filter:drop-shadow(1px 3px 3px #160c0738)}
+.desk-lamp{width:calc(var(--desk-unit)*28);left:calc(50% + var(--desk-unit)*13);top:45px;transform:rotate(-8deg)}
+.desk-quill{width:calc(var(--desk-unit)*27);left:calc(50% - var(--desk-unit)*39);top:215px;transform:rotate(-60deg)}
+.desk-letters{width:calc(var(--desk-unit)*21);left:calc(50% + var(--desk-unit)*13);top:49%;transform:rotate(11deg)}
+.desk-books{width:calc(var(--desk-unit)*30);right:calc(50% + var(--desk-unit)*9);bottom:-55px;transform:rotate(-12deg)}
+.desk-tea{width:calc(var(--desk-unit)*21);left:calc(50% + var(--desk-unit)*12);bottom:-35px;transform:rotate(12deg)}
 body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:#382318 url('./desk/wood.webp') center/cover no-repeat}
 @media(max-width:900px){
- .desk-lamp{width:210px;right:-50px;top:85px}
- .desk-quill{width:230px;left:-95px;top:270px}
- .desk-letters{width:190px;right:-85px;top:47%}
- .desk-books{width:170px;left:-65px;bottom:18px}
- .desk-tea{width:140px;right:-38px;bottom:18px}
+ .desk-lamp{left:calc(50% + var(--desk-unit)*9)}
+ .desk-quill{left:calc(50% - var(--desk-unit)*32);top:28%}
+ .desk-letters{left:calc(50% + var(--desk-unit)*9)}
+ .desk-books{right:calc(50% + var(--desk-unit)*7);bottom:-25px}
+ .desk-tea{left:calc(50% + var(--desk-unit)*8);bottom:-15px}
 }
-@media(max-width:540px){
- #ss-blue-silver>header{padding:18px 22px}
- .desk-lamp{width:155px;right:-55px;top:70px}
- .desk-quill{width:185px;left:-95px;top:250px}
- .desk-letters{width:145px;right:-85px;top:48%}
- .desk-books{width:130px;left:-65px;bottom:12px}
- .desk-tea{width:105px;right:-45px;bottom:12px}
-}
+@media(max-width:540px){#ss-blue-silver>header{padding:18px 22px}}
