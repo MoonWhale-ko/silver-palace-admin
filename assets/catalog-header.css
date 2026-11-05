@@ -192,3 +192,15 @@
 .catalog-brand img{filter:brightness(0) saturate(100%) opacity(.85)}
 #ss-blue-silver .search-results .section-heading button{border:0;background:none;color:#29343d;cursor:pointer}
 #ss-blue-silver .search-results .result-row{color:#29343d;font:inherit;cursor:pointer}
+/* Fixed compact header and a centered catalog heading clear of desk props. */
+#ss-blue-silver{padding-top:104px}
+#ss-blue-silver>header.catalog-header{position:fixed;top:20px;left:50%;transform:translateX(-50%);max-width:660px;margin:0;z-index:100}
+#ss-blue-silver #b-dialog.catalog-page.catalog-dialog{max-width:660px;padding:22px 30px 30px}
+#ss-blue-silver #b-dialog #dialog-status{display:block;text-align:center;font:400 10px/1.7 MapoGoldenPier,serif;letter-spacing:.16em;color:#e6d6b5}
+#ss-blue-silver #b-dialog #dialog-title{text-align:center;font:400 30px/1.5 MapoGoldenPier,serif;letter-spacing:.12em;margin:6px 0 0;color:#f0e4cb}
+#ss-blue-silver #b-dialog #dialog-title:after{content:'';display:block;width:200px;height:5px;margin:12px auto 0;background:#cbb68b;mask:url('./divider-diamond.svg') center/100% 5px no-repeat;-webkit-mask:url('./divider-diamond.svg') center/100% 5px no-repeat}
+#ss-blue-silver #b-dialog .catalog-note{text-align:center;margin:14px 0 22px;font-size:11px;line-height:1.8;color:#e4d6bb}
+#ss-blue-silver #b-dialog .catalog-sort{display:flex;justify-content:flex-end;align-items:center;gap:10px;margin:0 0 0 auto;width:max-content;padding:5px 6px 5px 14px;border:1px solid #b49b69;background:#eee5ce url('./page-paper-original-v11.webp') center/400px auto;color:#38404a;font-size:11px;box-shadow:0 2px 3px #160c072b;clip-path:polygon(5px 0,calc(100% - 5px) 0,100% 5px,100% calc(100% - 5px),calc(100% - 5px) 100%,5px 100%,0 calc(100% - 5px),0 5px)}
+#ss-blue-silver #b-dialog .catalog-sort select{border:0;border-left:1px solid #b5a684;border-radius:0;padding:5px 22px 5px 10px;background:transparent;color:#29343d;font-size:12px;cursor:pointer}
+#ss-blue-silver .search-results{max-width:660px}
+@media(max-width:640px){#ss-blue-silver{padding-top:92px}#ss-blue-silver>header.catalog-header{top:16px;margin:0}#ss-blue-silver #b-dialog.catalog-page.catalog-dialog{padding-top:18px}#ss-blue-silver #b-dialog #dialog-title{font-size:26px}#ss-blue-silver #b-dialog .catalog-note{font-size:10px;margin-bottom:18px}}
